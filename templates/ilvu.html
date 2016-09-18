@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+.flash {
+	
+    
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 1s;
+	animation-iteration-count: infinite
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    from {color: red;}
+    to {color: black;}
+
+}
+img{
+width:20%
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 5px solid #7F15C5;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(odd) {
+    background-color: #C51010;
+}
+tr:nth-child(even) {
+    background-color: #418CD0;
+}
+</style>
+</head>
+<h1 class = "flash" style="text-align:center">Things I Love About Deenie</h1>
+
+<table>
+  {%for saying in love_sayings%}
+	  
+	  <tr>
+		<td>{{saying}}</td>
+
+		
+	  </tr>
+  {% endfor %}
+  </table>
+<p style="text-align:center"><img src  = "{{url_for('static',filename = 'Me.jpg')}}"></p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<title>The Big Decision</title>
+	<body style =" background-color:Crimson;text-align:center">
+	
+	<h3>I know that we were supposed to wait until tomorrow but I couldn't wait anymore.</h3>
+	<h3>I hope to be able to spend the rest of my life with you.</h3>
+	<h3>I hope to be able to make you as happy as you can be. </h3>
+	<img src  = "{{url_for('static',filename = 'LOVE_img.jpg')}}"height="300" width="300">
+		<div style =  "text-align:center">
+			<h1 style = "font-size:30px;border: 1px solid powderblue; padding: 15px;text-align: center;width :100%; ">
+				Will you marry me?
+			</h1>
+			
+			
+				<form style = "font-size:30px" action="decision" method="POST" id = "stock form">
+				
+					
+					<select style = "font-size:20px" name = "decision" form = "stock form">
+						<option style = "font-size:20px" value = "yes">Yes</option>
+						<option style = "font-size:20px" value = "no">No</option>
+					</select>
+					
+					<input style = "font-size:20px" type="submit" name="my-form" value="Send">
+					
+				</form>
+		</div>
+			<br>
+			<br>
+	</body>
+</html>

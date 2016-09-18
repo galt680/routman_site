@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h1>Overbought Stocks</h1>
+<table>
+  <tr>
+    <th>Symbol</th>
+    <th>RSI</th>
+    <th>Stochastic SlowK</th>
+	<th>Stochastic SlowD</th>
+  </tr>
+  {%for key in alerts%}
+  {%if key[1] == -1%}
+	  
+	  <tr>
+		<td>{{key[0]}}</td>
+		<td>{{key[2]}}</td>
+		<td>{{key[3]}}</td>
+		<td>{{key[4]}}</td>
+
+		
+	  </tr>
+   {%endif%}	  
+  {% endfor %}
+  </table>
+  <h1>Oversold Stocks</h1>
+  <table>
+  <tr>
+    <th>Symbol</th>
+    <th>RSI</th>
+    <th>Stochastic SlowK</th>
+	<th>Stochastic SlowD</th>
+  </tr>
+  {%for key in alerts%}
+  {%if key[1] == 1%}
+	  
+	  <tr>
+		<td>{{key[0]}}</td>
+		<td>{{key[2]}}</td>
+		<td>{{key[3]}}</td>
+		<td>{{key[4]}}</td>
+
+		
+	  </tr>
+   {%endif%}	  
+  {% endfor %}
+  </table>
+  	<form action="/">
+		<input style = "font-size:15px" type="submit" value="Return to Homepage">
+	</form>
+</body>
+</html>

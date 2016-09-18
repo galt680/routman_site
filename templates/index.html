@@ -1,0 +1,133 @@
+{% block content %}
+<title>
+    Routman App
+</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='attempt.css') }}">
+    <div>
+    <img     
+    src="data:img/png;base64,{{ picture }}"
+        />
+</div>
+<body>
+    <style>
+body {
+	color:black;
+    background-color: white;
+}
+</style>
+
+<style>	
+.flash {
+	
+    
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 1s;
+	animation-iteration-count: infinite
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    from {color: red;}
+    to {color: orange;}
+
+}
+</style>
+<div>
+
+	{%if alert%}
+	   <h2 class = "flash">
+	Alert
+	</h2>
+
+		<ul>
+		
+			
+				<ul class = "flash">
+					<li  style=" font-size:20px; border: 10px solid black">
+					The RSI is at {{alert[0]}} and the the Stochastics are at {{alert[1]}}
+					</li>
+				</ul>	
+			
+		{%endif%}
+		</ul>
+</div>
+
+	<ul>
+	<h2>GURU INFORMATION</h2>
+	<li style=" font font-size:20px; border: 10px solid black"><a href = {{guru_info}} target="_blank">{{whale_change}} 
+	<br><small>(For a breakdown on the exact holdings click here)</small></a> </li>
+	</ul>
+    <ul>
+	
+
+		<h2>SENTIMENT READINGS</h2>
+			{% for n in statements %}
+			<li style=" font font-size:20px; border: 10px solid black">{{n}}</li>
+			{% endfor %}
+     </ul>
+</body>
+<div>
+	<h2>
+	SEEKING ALPHA
+	</h2>
+	<ul>
+	{% for n in seeking_alpha %}
+	<ul>
+		<li style=" font-size:20px; border: 10px solid black">
+        <a href = {{n[0]}} target="_blank">{{n[1]}}</a>
+		</li>
+	</ul>	
+        {% endfor %}
+	</ul>
+</div>
+<div>
+	<h2>
+	MARKET WATCH
+	</h2>
+	<ul>
+	{% for n in market_watch %}
+	<ul>
+		<li style=" font-size:20px; border: 10px solid black">
+        <a href = {{n[0]}} target="_blank">{{n[1]}}</a>
+		</li>
+	</ul>	
+        {% endfor %}
+	</ul>
+</div>	
+<div>
+	<h2>
+	Street Insider
+	</h2>
+	<ul>
+	{% for n in si %}
+	<ul>
+		<li style=" font-size:20px; border: 10px solid black">
+        <a href = {{n[0]}} target="_blank">{{n[1]}}</a>
+		</li>
+	</ul>	
+        {% endfor %}
+	</ul>
+</div>	
+<div>
+	<h2>
+	MOTLEY FOOL
+	</h2>
+	<ul>
+	{% for n in fool %}
+	<ul>
+		<li style=" font-size:20px; border: 10px solid black">
+        <a href = {{n[0]}} target="_blank">{{n[1]}}</a>
+		</li>
+	</ul>	
+        {% endfor %}
+	</ul>
+</div>
+<form  action="/myform1 	">
+    <input style = "font-size:20px" type="submit" value="Enter another symbol">
+</form>
+		<br>
+	<form action="/">
+		<input style = "font-size:15px" type="submit" value="Return to Homepage">
+			</form>
+{% endblock %}

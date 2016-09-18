@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+	<html lang = "en"> 
+	<title>SPY </title>
+	<body style = "
+	background-color:powderblue;
+    width: 600px;
+    padding: 30px;
+	">	
+	<h2>Bittles Levels</h2>
+		<ul>
+        {% for n in levels %}
+        <li style="font-size:20px; border: 10px solid black">{{n}}</li>
+        {% endfor %}
+      </ul>
+	  <h2>Meisler Levels</h2>
+	  <ul>
+        {% for n in lista %}
+        <li style="font-size:20px; border: 10px solid black">{{n}}</li>
+        {% endfor %}
+      </ul>
+	<p>{{rsi}}</p>
+	<p>{{rsi_statement}}</p>
+	<p>{{bband_statement}}</p>
+	<p>{{avg}}</p>
+	<p>{{market_statement}}</p>
+	
+		
+	<h3>McCLellan Oscillator </h3>
+	<div style = "width:700px; font-size:20px; border: 5px solid black">
+	<img style = padding:50px"  src = {{picture}}>
+	<br>
+	<small>Credit to http://www.mcoscillator.com/</small>
+	</div>
+	<br>
+		<br>
+	<form action="/">
+		<input style = "font-size:15px" type="submit" value="Return to Homepage">
+			</form>
+	
+	</body>
+	</html>
+   

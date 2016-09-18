@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+	<html lang = "en">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='home_page_css.css') }}">
+		<body>
+		<h1>To see what the the sentiment and technical indicators for an individual click the button below.</h1>
+			
+			<form action="/myform1" >
+				<input style = "font-size:30px"type="submit" value="See sentiment values for stock">
+				
+			</form>
+			
+			<h1>To see an evaluation of the overall market click the button below.</h1>
+			
+			<form action="/spy">
+				<input style = "font-size:30px"type="submit" value="Get overview of SPY">
+			</form>
+			
+			<h1>To see the watchlist of overbought and oversold stocks click below.</h1>
+			<form action="/symbol_alerts">
+				<input style = "font-size:30px"type="submit" value="Watchlist">
+			</form>
+			
+			<h1>To see the watchlist of overbought and oversold stocks on the S&P500 click below.</h1>
+			<form action="/spy_watchlist">
+				<input style = "font-size:30px"type="submit" value="Watchlist">
+			</form>
+			
+
+		</body>
+	</html>
+   
