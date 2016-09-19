@@ -1,5 +1,6 @@
 #Specific files to ignore
 ########################
+/ilvu.py
 /__init__.py
 /__init__.pyc
 / authtoken.p
