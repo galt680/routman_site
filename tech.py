@@ -2,12 +2,16 @@ import talib as ta
 import Quandl as q
 import numpy as np
 from passwords import auth
+from live_tech import Tech
+
+
 class Tech(object):
 
 	def __init__(self,name):
 		self.name = name
 		try:
 			self.data = q.get('YAHOO/%s'%name.upper(),authtoken =  auth)
+			
 		except:
 			try:
 				self.data = q.get('GOOG/%s'%name.upper(),authtoken =  auth)
