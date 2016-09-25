@@ -1,0 +1,12 @@
+
+
+
+
+
+1) Set up the alerts to work at night
+
+2)Create alert Implied Volatility and compare to yesterday's Implied Volatility (Look for 30% increase)
+	a. create sqlite.db that will store values and compare
+		/ how to swap rows in sqlite db
+
+3) Create alert for when Stock is in top 40% of Implied Volatility for the past year. 
