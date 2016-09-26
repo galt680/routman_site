@@ -6,7 +6,7 @@ import re
 import requests
 
 class Tech(object):
-	def __init__(self,name,time = "hourly"):
+	def __init__(self,name,time = "daily"):
 		#get the minute data from google finance API, get the most recent prices in the chain 
 		self.name = name
 		url = "https://www.google.com/finance/getprices?i=60&p=1d&f=c,o,h,l&df=cpct&q=%s"%(name.upper())
