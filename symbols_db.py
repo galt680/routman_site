@@ -24,9 +24,11 @@ for i in symbols:
 	except Exception as e:
 		print e
 		print "%s unsuccessful"%i
-
-con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA.db')
-con = lite.connect('ALERT_DATA.db')
+try:
+	con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA.db')
+except:
+	con = lite.connect('ALERT_DATA.db')
+print con
 cur = con.cursor()
 cur.execute("DROP TABLE IF EXISTS ALERT_DATA")
 cur.execute("CREATE TABLE ALERT_DATA(NAME TEXT,SIGNAL INT,RSI INT,SLOWK INT,SLOWD INT)")
