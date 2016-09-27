@@ -1,9 +1,4 @@
-import talib as ta
-import Quandl as q
-import numpy as np
 import sqlite3 as lite
-from tech import Tech
-from flask import render_template
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
@@ -39,10 +34,10 @@ def send_alert():
 		for name,signal,rsi,slowk,slowd in rows:
 			rsi_only.append("%s is overbought with RSI at %s")%(name,rsi)
 	if len(alert_oversold) <= len(alert_overbought):
-		message = """Good morning,\n(This is an automated message)\n\nThese are the stocks that are currently overbought from your watchlist:\n"""
+		message = """Good evening,\n(This is an automated message)\n\nThese are the stocks that are currently overbought from your watchlist:\n"""
 		for i in alert_overbought:
 			message +='\n %s'%i
-		message +="""\n\nThese are the stockst that are currently oversold from your watchlist:\n"""
+		message +="""\n\nThese are the stocks that are currently oversold from your watchlist:\n"""
 		for i in alert_oversold:
 			message += '\n %s'%i
 		for i in rsi_only:
