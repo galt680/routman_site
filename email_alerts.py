@@ -15,6 +15,7 @@ def send_alert():
 	today = datetime.date.today()
 	alert_overbought = []
 	alert_oversold = []
+	rsi_only
 	con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA.db')#/home/yaschaffel/mysite/ALERT_DATA.db
 	cur = con.cursor()
 	with con:
@@ -31,13 +32,20 @@ def send_alert():
 				alert_oversold.append("%s is oversold with RSI at %s and the stochastics at %s and at %s"%(name,rsi,slowk,slowd))
 			else:
 				pass
-
+	with con:
+		cur = con.cursor()
+		cur.execute("SELECT * FROM ALERT_DATA WHERE RSI > 65 ORDER BY RSI DESC")
+		rows = cur.fetchall()
+		for name,signal,rsi,slowk,slowd in rows:
+			rsi_only.append("%s is overbought with RSI at %s")%(name,rsi)
 	if len(alert_oversold) <= len(alert_overbought):
 		message = """Good morning,\n(This is an automated message)\n\nThese are the stocks that are currently overbought from your watchlist:\n"""
 		for i in alert_overbought:
 			message +='\n %s'%i
 		message +="""\n\nThese are the stockst that are currently oversold from your watchlist:\n"""
 		for i in alert_oversold:
+			message += '\n %s'%i
+		for i in rsi_only:
 			message += '\n %s'%i
 		message += "\n\n If you have any adjustments you'd like to make to the alert settings or if you'd like to add symbols to the watchlist please let me know.\nYisroel Schaffel"
 
@@ -47,6 +55,8 @@ def send_alert():
 			message +='\n %s'%i
 		message +="""\n\nThese are the stockst that are currently overbought from your watchlist:\n"""
 		for i in alert_overbought:
+			message += '\n %s'%i
+		for i in rsi_only:
 			message += '\n %s'%i
 		message += "\n\n If you have any adjustments you'd like to make to the alert settings or if you'd like to add symbols to the watchlist please let me know.\nYisroel Schaffel"
 
