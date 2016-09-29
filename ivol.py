@@ -14,10 +14,13 @@ if os.path.exists('C:\\Users\\Yasch'):
 	caps["marionette"] = True
 	caps["binary"] = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"
 	browser = webdriver.Firefox(capabilities=caps)
+	con = lite.connect('IMP_VOL_TABLE.db')
 else:
+	con = lite.connect('/home/yaschaffel/mysite/IMP_VOL_TABLE.db')
 	from pyvirtualdisplay import Display
 	display = Display(visible=0, size=(800, 600))
 	display.start()
+	
 
 
 
