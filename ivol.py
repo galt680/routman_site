@@ -25,7 +25,9 @@ else:
 	con = lite.connect('/home/yaschaffel/mysite/IMP_VOL_TABLE.db')
 	from pyvirtualdisplay import Display
 	display = Display(visible=0, size=(800, 600))
+	driver = webdriver.Firefox()
 	display.start()
+
 	
 
 # def check_change():
@@ -80,7 +82,8 @@ con.close()
 stop = timeit.default_timer()
 driver.get('http://www.ivolatility.com/home.j?logoff=1')
 driver.close()
-	
+driver.quit()
+display.stop()
 # driver.quit()
 # try:
 	# display.stop()
