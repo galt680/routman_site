@@ -9,6 +9,7 @@ from passwords import ivol
 import datetime
 import finsymbols
 sp500 = finsymbols.get_sp500_symbols()
+import random
 
 
 start = timeit.default_timer()
@@ -25,10 +26,9 @@ else:
 	con = lite.connect('/home/yaschaffel/mysite/IMP_VOL_TABLE.db')
 	from pyvirtualdisplay import Display
 	display = Display(visible=0, size=(800, 600))
-	driver = webdriver.Firefox()
 	display.start()
+	driver = webdriver.Firefox()
 
-	
 
 # def check_change():
 

@@ -41,8 +41,8 @@ try:
 except:
 	pass
 
-	
-	
+
+
 # dic = {}
 # for i in sp500:
 	# i = i['symbol']

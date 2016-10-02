@@ -30,16 +30,16 @@ tr:nth-child(even) {
   </tr>
   {%for key in alerts%}
   {%if key[1] == -1%}
-	  
+
 	  <tr>
 		<td>{{key[0]}}</td>
 		<td>{{key[2]}}</td>
 		<td>{{key[3]}}</td>
 		<td>{{key[4]}}</td>
 
-		
+
 	  </tr>
-   {%endif%}	  
+   {%endif%}
   {% endfor %}
   </table>
   <h1>Oversold Stocks</h1>
@@ -52,19 +52,19 @@ tr:nth-child(even) {
   </tr>
   {%for key in alerts%}
   {%if key[1] == 1%}
-	  
+
 	  <tr>
 		<td>{{key[0]}}</td>
 		<td>{{key[2]}}</td>
 		<td>{{key[3]}}</td>
 		<td>{{key[4]}}</td>
 
-		
+
 	  </tr>
-   {%endif%}	  
+   {%endif%}
   {% endfor %}
   </table>
-  <h1>RSI Overbought Stocks</h1>
+  <h1>RSI Oversold Stocks</h1>
   <table>
   <tr>
     <th>Symbol</th>
@@ -75,10 +75,10 @@ tr:nth-child(even) {
 	  <tr>
 		<td>{{name}}</td>
 		<td>{{rsi}}</td>
-	  </tr>	  
+	  </tr>
   {% endfor %}
   </table>
-   <h1>RSI Oversold Stocks</h1>
+   <h1>RSI Overbought Stocks</h1>
   <table>
   <tr>
     <th>Symbol</th>
@@ -89,9 +89,9 @@ tr:nth-child(even) {
 	  <tr>
 		<td>{{name}}</td>
 		<td>{{rsi}}</td>
-	  </tr>	  
+	  </tr>
   {% endfor %}
-  </table> 
+  </table>
   <br>
   	<form action="/">
 		<input style = "font-size:15px" type="submit" value="Return to Homepage">
