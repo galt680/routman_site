@@ -80,19 +80,21 @@ sVXMT = indexs[3]
 page = requests.get('http://www.bloomberg.com/quote/SPY:US')
 soup = bs4.BeautifulSoup(page.text,'lxml')
 sSPY = float(re.findall(r'''(\d\d\d\.\d\d+)''',(str(soup.find_all('div',class_ = 'price'))))[0])
-print sSPY	
 
 
-
-#get VVIX from cnbc
-r = requests.get('http://data.cnbc.com/quotes/.VVIX')
-data = r.content
-#filter
-seach = '''"last":"'''
-data = data[data.index(seach) + len(seach):]
-data = data[:data.index(',')]
-#convert from string to float while being able to keep all the digits and period.
-sVVIX = float(''.join(d for d in data if d.isdigit() or d == '.'))
+try:
+	#get VVIX from cnbc
+	r = requests.get('http://data.cnbc.com/quotes/.VVIX')
+	data = r.content
+	#filter
+	seach = '''"last":"'''
+	data = data[data.index(seach) + len(seach):]
+	data = data[:data.index(',')]
+	#convert from string to float while being able to keep all the digits and period.
+	sVVIX = float(''.join(d for d in data if d.isdigit() or d == '.'))
+except:
+	print Exception
+	pass
 
 
 
@@ -125,7 +127,10 @@ VXV = appender(qVXV,sVXV)
 VX1 = appender(qVX1,sVX1)
 VX2 = appender(qVX2,sVX2)
 VX3 = appender(qVX3,sVX3)
-VVIX = appender(qVVIX,sVVIX)
+try:
+	VVIX = appender(qVVIX,sVVIX)
+except:
+	pass
 #quandl doesnt have vxmt
 VXMT = sVXMT
 
