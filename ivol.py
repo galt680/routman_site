@@ -1,12 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import re
 import time
 import timeit
 import os
 import sqlite3 as lite
 from passwords import ivol
-import datetime
+
 import finsymbols
 sp500 = finsymbols.get_sp500_symbols()
 import random
@@ -16,18 +15,19 @@ start = timeit.default_timer()
 
 
 if os.path.exists('C:\\Users\\Yasch'):
-	print "hello"
+	print "home"
 	caps = DesiredCapabilities.FIREFOX
 	caps["marionette"] = True
 	caps["binary"] = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"
 	driver = webdriver.Firefox(capabilities=caps)
 	con = lite.connect('IMP_VOL_TABLE.db')
 else:
-	con = lite.connect('/home/yaschaffel/mysite/IMP_VOL_TABLE.db')
-	from pyvirtualdisplay import Display
-	display = Display(visible=0, size=(800, 600))
-	display.start()
-	driver = webdriver.Firefox()
+    print "remote"
+    con = lite.connect('/home/yaschaffel/mysite/IMP_VOL_TABLE.db')
+    from pyvirtualdisplay import Display
+    display = Display(visible=0, size=(800, 600))
+    display.start()
+    driver = webdriver.Firefox()
 
 
 # def check_change():
@@ -69,7 +69,7 @@ for i in sp500:
 			print i['symbol']
 			pass
 		cur.execute("""update IMP_VOL_TABLE set TODAY_VALUE = %s where name = '%s'"""%(current,i['symbol']))
-		print "%s success"%i['symbol']
+		print "%s success The value is %s"%(i['symbol'],current)
 		time.sleep(random.uniform(0,1.25))
 	except:
 		pass
@@ -84,6 +84,11 @@ driver.get('http://www.ivolatility.com/home.j?logoff=1')
 driver.close()
 driver.quit()
 display.stop()
+stop = timeit.default_timer()
+try:
+	print "Task took %s minutes"%(int(stop - start)/60)
+except:
+	pass
 # driver.quit()
 # try:
 	# display.stop()
