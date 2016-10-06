@@ -37,7 +37,7 @@ def readings():
 		try:
 			whale_change,guru_info = whale_wisdom(symbol)
 		except Exception as e:
-			
+
 			return render_template("myform.html", a = "nother",b = ", the previous symbol appears to be invalid")
 		index = sentiment_index(symbol)
 		short = short_interest(symbol)
@@ -113,11 +113,11 @@ def readings():
 					for y in x:
 						mw_links_names.append([y.get('href'),y.text])
 					print mw_links_names
-					return mw_links_names
-					
+				return mw_links_names
+
 			return si(symbol = symbol),fool(symbol = symbol),seeking_alpha(symbol = symbol),market_watch(symbol = symbol)
 		si,fool,seeking_alpha,market_watch = links()
-		
+
 		print len(si),len(fool),len(seeking_alpha),len(market_watch)
 		statements = [index,short]
 		print 4
