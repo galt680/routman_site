@@ -37,6 +37,7 @@
 *.rar
 *.tar
 *.zip
+*.db-journal
 
 # Logs and databases #
 ######################
