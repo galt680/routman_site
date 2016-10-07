@@ -19,7 +19,10 @@ for i in sp500:
 	except:
 		print "%s unsuccessful"%i
 
-con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA.db')
+try:
+	con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA.db')
+except:
+	con = lite.connect('ALERT_DATA.db')
 cur = con.cursor()
 cur.execute("DROP TABLE IF EXISTS SPY_DATA")
 cur.execute("CREATE TABLE SPY_DATA(NAME TEXT,SIGNAL INT,RSI INT,SLOWK INT,SLOWD INT)")

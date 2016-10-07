@@ -64,6 +64,35 @@ tr:nth-child(even) {
    {%endif%}	  
   {% endfor %}
   </table>
+    <h1>RSI Overbought Stocks</h1>
+  <table>
+  <tr>
+    <th>Symbol</th>
+    <th>RSI</th>
+
+  </tr>
+  {%for name,signal,rsi,slowk,slowd in rsi_overbought%}
+	  <tr>
+		<td>{{name}}</td>
+		<td>{{rsi}}</td>
+	  </tr>
+  {% endfor %}
+  </table>
+   <h1>RSI Oversold Stocks</h1>
+  <table>
+  <tr>
+    <th>Symbol</th>
+    <th>RSI</th>
+
+  </tr>
+  {%for name,signal,rsi,slowk,slowd in rsi_oversold%}
+	  <tr>
+		<td>{{name}}</td>
+		<td>{{rsi}}</td>
+	  </tr>
+  {% endfor %}
+  </table>
+  <br>
   	<form action="/">
 		<input style = "font-size:15px" type="submit" value="Return to Homepage">
 	</form>

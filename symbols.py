@@ -30,11 +30,10 @@ def symbol_alerts():
 		#returns results to alerts list
 
 		cur.execute("SELECT * FROM ALERT_DATA WHERE SIGNAL != 0 ORDER BY RSI DESC")
-		rows = cur.fetchall()
-		for row in rows:
+		for row in cur.fetchall():
 			alerts.append(row)
 
-		#uses cursor to get all where RSI is > 65 and returns to rsi_only list
+		#uses cursor to get all where RSI is > 65 and returns to rsi_only listo
 		cur.execute("SELECT * FROM ALERT_DATA WHERE RSI > 65 ORDER BY RSI DESC")
 		rows = cur.fetchall()
 		for row in rows:
