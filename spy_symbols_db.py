@@ -1,4 +1,4 @@
-import sqlite3 as lite
+
 import timeit
 
 start = timeit.default_timer()

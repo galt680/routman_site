@@ -18,7 +18,8 @@ def form():
 	return render_template("myform.html")
 #after the form is rendered and a symbol is input it calls the reading fucntion to gather all relevant data for that symbol
 def readings():
-	symbol = request.form['test']
+	#! changed input name from "test" to "symbol"
+	symbol = request.form['symbol']
 	if (symbol.lower() == 'yds'):
 		return render_template('say_yes.html')
 	elif (symbol == "#ilvu"):
@@ -72,8 +73,13 @@ def readings():
 		data = io.getvalue().encode('base64').decode('utf8')
 	#creates function that gets links from soup_str
 		def links():
+			#attempt to build funtion that can pull news from all sites using dict
+			def meta_scrape(symbol):
+				site_specific = {}
 			def si(symbol):
-				page = requests.get("http://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=%s"%symbol,headers = headers)
+			#!
+				url = "http://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=%s"%symbol
+				page = requests.get(url,headers = headers)
 				soup = bs4.BeautifulSoup(page.text,"lxml")
 				links = soup.find_all("a",{"class":"story_title"})
 				si_links_names = []
