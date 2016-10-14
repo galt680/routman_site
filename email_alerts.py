@@ -32,14 +32,14 @@ def send_watchlist(test = False):
 				alert_oversold.append("%s is oversold with RSI at %s and the stochastics at %s and at %s"%(name,rsi,slowk,slowd))
 			else:
 				pass
-				
+
 		cur.execute("SELECT * FROM ALERT_DATA WHERE RSI NOT BETWEEN 35 AND 65 ORDER BY RSI DESC")
 		rows = cur.fetchall()
         for name,signal,rsi,slowk,slowd in rows:
 			if rsi > 65:
 				rsi_overbought.append("%s is overbought with RSI at %s"%(name,rsi))
 			elif rsi < 35:
-				rsi_oversold.append("%s is oversold with RSI at %s"%(name,rsi))	
+				rsi_oversold.append("%s is oversold with RSI at %s"%(name,rsi))
 			else:
 				pass
 
@@ -108,13 +108,13 @@ def send_spy(test = False):
 				alert_oversold.append("%s is oversold with RSI at %s and the stochastics at %s and at %s"%(name,rsi,slowk,slowd))
 			else:
 				pass
-				
+
 		cur.execute("SELECT * FROM SPY_DATA WHERE RSI NOT BETWEEN 35 AND 65 ORDER BY RSI DESC")
 		for name,signal,rsi,slowk,slowd in cur.fetchall():
 			if rsi > 65:
 				rsi_overbought.append("%s is overbought with RSI at %s"%(name,rsi))
 			elif rsi < 35:
-				rsi_oversold.append("%s is oversold with RSI at %s"%(name,rsi))	
+				rsi_oversold.append("%s is oversold with RSI at %s"%(name,rsi))
 			else:
 				pass
 
@@ -156,7 +156,7 @@ def send_spy(test = False):
 		server.sendmail(fromaddr, toaddr, text)
 		server.quit()
 		print "SPY Email sent!"
-	
-	
+
+
 send_watchlist()
 send_spy()
