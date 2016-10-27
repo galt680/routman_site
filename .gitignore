@@ -15,8 +15,10 @@
 /rapp.pyc
 /passwords.py
 /passwords.pyc
+/.ipynb_checkpoints
 # Compiled source #
 ###################
+*ipynb
 *.pyc
 *.com
 *.class
