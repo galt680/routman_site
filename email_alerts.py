@@ -9,7 +9,7 @@ except:
 import datetime
 from passwords import pswd
 
-'''def send_watchlist(test = False):
+def send_watchlist(test = False):
     today = datetime.date.today()
     alert_overbought = []
     alert_oversold = []
@@ -161,5 +161,5 @@ def send_spy(test = False):
         print ("SPY Email sent!")
 
 
-send_watchlist(test = True)
-send_spy(test = True)'''
+send_watchlist()
+send_spy()
