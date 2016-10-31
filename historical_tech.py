@@ -85,7 +85,7 @@ def make_spy():
     con.commit()
     con.close()
 
-if not market_day():
+if market_day():
     make_watchlist()
     make_spy()
 else:
