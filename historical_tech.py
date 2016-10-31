@@ -22,7 +22,7 @@ def market_day():
 
 
 def make_watchlist():
-    date = (datetime.datetime.today()- datetime.timedelta(days = 3)).strftime('%Y-%m-%d')
+    date = (datetime.datetime.today()).strftime('%Y-%m-%d')
     symbols = [
             'AAL','AAPL','ABT','ABBV','ABX','ACAD','ADBE','ADP','AET','AGO','ALL','AMAT','AMD','AMGN','APA','AXP','BA','BAC','BAX','BCLYF',
             'BHI','BMY','BP','C','CAR','CBI','CELG','CMCSA','CNI','COP', 'CREE','CSCO','CREE','CTL','CLX','CTSH','CVS','CVX','DFS','DIS',
@@ -59,7 +59,7 @@ def make_watchlist():
     con.close()
 
 def make_spy():
-    date = (datetime.datetime.today()- datetime.timedelta(days = 3)).strftime('%Y-%m-%d')
+    date = (datetime.datetime.today()).strftime('%Y-%m-%d')
     sp500 = finsymbols.get_sp500_symbols()
     dic = {}
     for i in sp500:
