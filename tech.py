@@ -1,5 +1,8 @@
 import talib as ta
-import Quandl as q
+try:
+	import Quandl as q
+except:
+	import quandl as q
 import numpy as np
 from passwords import auth
 import requests
