@@ -7,7 +7,7 @@ from fake_useragent import UserAgent
 import matplotlib.pyplot as plt
 import talib as ta
 import numpy as np
-import Quandl as q
+import quandl as q
 import re,requests,bs4,urllib,time,random
 from tech import Tech
 from ilvu import love

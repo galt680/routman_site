@@ -1,7 +1,7 @@
 from __future__ import division
 import pandas as pd
 import numpy as np
-import Quandl as q
+import quandl as q
 from mv import VIX,VX1,VX2,VXST,T1,T2,VX3,VXST,VXV
 from passwords import auth
 

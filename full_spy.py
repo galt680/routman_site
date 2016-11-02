@@ -1,5 +1,5 @@
 import talib as ta
-import Quandl as q
+import quandl as q
 import numpy as np
 import sqlite3 as lite
 from tech import Tech

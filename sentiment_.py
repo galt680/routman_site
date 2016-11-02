@@ -1,4 +1,7 @@
-import Quandl as q
+try:
+	import Quandl as q
+except:
+	import quandl as q
 import pandas as pd
 import requests
 import re

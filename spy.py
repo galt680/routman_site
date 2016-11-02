@@ -1,6 +1,6 @@
 import requests,bs4
 import re
-import Quandl as q
+import quandl as q
 import pandas as pd
 import numpy as np
 import talib as ta

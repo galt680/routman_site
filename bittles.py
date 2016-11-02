@@ -1,4 +1,4 @@
-import Quandl as q
+import quandl as q
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

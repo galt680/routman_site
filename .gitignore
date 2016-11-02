@@ -18,6 +18,7 @@
 /.ipynb_checkpoints
 # Compiled source #
 ###################
+\venv*
 *ipynb
 *.pyc
 *.com

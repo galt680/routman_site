@@ -1,7 +1,8 @@
 #importing request allows to pull down a website
 import requests
 #import Quandl which allows to pull down data from Quandl website
-import Quandl as q
+
+import quandl as q
 #gives acces to pandas
 import pandas as pd
 #allows access to date features and holiday features
