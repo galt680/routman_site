@@ -62,7 +62,7 @@ for i in sp500:
             print i['symbol']
             pass
         cur.execute("""update IMP_VOL_TABLE set TODAY_VALUE = %s where name = '%s'"""%(current,i['symbol']))
-        cur.execute("INSERT INTO HISTORICAL_VOL(DAY,NAME,VOL) VALUES (?,?,?)",(date,i['symbol'],current))
+        # cur.execute("INSERT INTO HISTORICAL_VOL(DAY,NAME,VOL) VALUES (?,?,?)",(date,i['symbol'],current))
         print "%s success The value is %s"%(i['symbol'],current)
         time.sleep(random.uniform(0,1.25))
     except:
