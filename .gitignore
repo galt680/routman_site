@@ -19,7 +19,7 @@
 # Compiled source #
 ###################
 \venv*
-*ipynb
+*.ipynb
 *.pyc
 *.com
 *.class
