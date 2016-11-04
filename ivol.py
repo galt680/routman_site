@@ -72,10 +72,10 @@ if market_day():
                 print i['symbol']
                 pass
             if market_day():
-				cur.execute("""update IMP_VOL_TABLE set TODAY_VALUE = %s where name = '%s'"""%(current,i['symbol']))
-				cur.execute("INSERT INTO HISTORICAL_VOL(DAY,NAME,VOL) VALUES (?,?,?)",(date,i['symbol'],current))
-			else:
-				pass
+                cur.execute("""update IMP_VOL_TABLE set TODAY_VALUE = %s where name = '%s'"""%(current,i['symbol']))
+                cur.execute("INSERT INTO HISTORICAL_VOL(DAY,NAME,VOL) VALUES (?,?,?)",(date,i['symbol'],current))
+            else:
+                pass
             print "%s success The value is %s"%(i['symbol'],current)
             time.sleep(random.uniform(0,1.25))
         except:
