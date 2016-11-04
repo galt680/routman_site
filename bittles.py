@@ -1,4 +1,7 @@
-import quandl as q
+try:
+    import quandl as q
+except:
+    import Quandl as q
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -70,31 +73,31 @@ tot, eq = total_ratio, Equity
 
 #create function that determines if Bittlles various measurments are in bullish, bearish or neutral territory.
 def bittles_levels(tot = tot, eq = eq,VIX = VIX):
-	#create a dict for bittles inidciators and their respecitve levels.
-	levels = {
-	'tot':[tot,(.95>tot),(.8<tot),'The 10 Day MA of the Total Put/Call ratio is %s%% this is '%str(round(tot,2))],
-	'eq':[eq,(.7>eq),(.6<eq),'The 3 Day MA of the Equity Put/Call ratio is %s%% this is '%str(round(eq,2))],
-	'VIX':[VIX[-1],(VIX[-1]>23),(VIX[-1]<16),'The VIX is at %s this is '%str(VIX[-1])],
-	'AAII':[AAII,(AAII[3]>AAII[0]),(AAII[0]>= 2*(AAII[3])),("The AAII bulls are at %s, the bears are at %s, the neutral are at %s. Overall this is "	%(AAII[0],AAII[3],AAII[6]))],
-	"NAAIM":[naaim,(naaim<30),(naaim>70),'The exposure of NAAIM members is %s this is'%(str(naaim))]
-	}
-	# create function that iterates over dict and prints statement depnding on level
-	def thresh(levels):
-		statements = []
-		for key in levels:
-			if levels[key][1]:
-				statements.append(levels[key][3]+'bullish.')
-			elif levels[key][2]:
-				statements.append(levels[key][3] + ' bearish.')
-			else:
-				statements.append(levels[key][3] + ' neutral.')
-		return statements
-	# print statements[0]
-	# print statements[1]
-	# print statements[2]
-	# print statements[3]
-	# print statements[4]
-	a = thresh(levels)
-	return a
+    #create a dict for bittles inidciators and their respecitve levels.
+    levels = {
+    'tot':[tot,(.95>tot),(.8<tot),'The 10 Day MA of the Total Put/Call ratio is %s%% this is '%str(round(tot,2))],
+    'eq':[eq,(.7>eq),(.6<eq),'The 3 Day MA of the Equity Put/Call ratio is %s%% this is '%str(round(eq,2))],
+    'VIX':[VIX[-1],(VIX[-1]>23),(VIX[-1]<16),'The VIX is at %s this is '%str(VIX[-1])],
+    'AAII':[AAII,(AAII[3]>AAII[0]),(AAII[0]>= 2*(AAII[3])),("The AAII bulls are at %s, the bears are at %s, the neutral are at %s. Overall this is "    %(AAII[0],AAII[3],AAII[6]))],
+    "NAAIM":[naaim,(naaim<30),(naaim>70),'The exposure of NAAIM members is %s this is'%(str(naaim))]
+    }
+    # create function that iterates over dict and prints statement depnding on level
+    def thresh(levels):
+        statements = []
+        for key in levels:
+            if levels[key][1]:
+                statements.append(levels[key][3]+'bullish.')
+            elif levels[key][2]:
+                statements.append(levels[key][3] + ' bearish.')
+            else:
+                statements.append(levels[key][3] + ' neutral.')
+        return statements
+    # print statements[0]
+    # print statements[1]
+    # print statements[2]
+    # print statements[3]
+    # print statements[4]
+    a = thresh(levels)
+    return a
 if __name__ == "__main__":
-	bittles_levels()
+    bittles_levels()

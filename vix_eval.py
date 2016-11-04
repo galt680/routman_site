@@ -1,7 +1,10 @@
 from __future__ import division
 import pandas as pd
 import numpy as np
-import quandl as q
+try:
+	import quandl as q
+except:
+	import Quandl as q
 from mv import VIX,VX1,VX2,VXST,T1,T2,VX3,VXST,VXV
 from passwords import auth
 
@@ -119,17 +122,17 @@ def VATR():
 		return 0
 	print "The VATR is %s"%vatr
 def vix_put_call():
-    pcratio = (q.get("CBOE/VIX_PC",authtoken = auth)["VIX Put-Call Ratio"])
-    if float(pcratio[-1:]) > pcratio.quantile(.95):
-        return "The VIX Put/Call ratio is at %s, this is extremely overbought and bearish for the SPY."%float(pcratio[-1:])
-    elif float(pcratio[-1:]) > pcratio.quantile(.85):
-        return "The VIX Put/Call ratio is at %s, this is slightly overbought and bearish for the SPY."%float(pcratio[-1:])
-    elif float(pcratio[-1:]) < pcratio.quantile(.05):
-        return "The VIX Put/Call ratio is at %s, this is extremely oversold and bullish for the SPY."%float(pcratio[-1:])
-    elif float(pcratio[-1:]) < pcratio.quantile(.15):
-        return "The VIX Put/Call ratio is at %s, this is slightly oversold and bullish for the SPY."%float(pcratio[-1:])
-    else:
-        return "The VIX Put/Call ratio is at %s, this is a neutral reading."%float(pcratio[-1:])
+	pcratio = (q.get("CBOE/VIX_PC",authtoken = auth)["VIX Put-Call Ratio"])
+	if float(pcratio[-1:]) > pcratio.quantile(.95):
+		return "The VIX Put/Call ratio is at %s, this is extremely overbought and bearish for the SPY."%float(pcratio[-1:])
+	elif float(pcratio[-1:]) > pcratio.quantile(.85):
+		return "The VIX Put/Call ratio is at %s, this is slightly overbought and bearish for the SPY."%float(pcratio[-1:])
+	elif float(pcratio[-1:]) < pcratio.quantile(.05):
+		return "The VIX Put/Call ratio is at %s, this is extremely oversold and bullish for the SPY."%float(pcratio[-1:])
+	elif float(pcratio[-1:]) < pcratio.quantile(.15):
+		return "The VIX Put/Call ratio is at %s, this is slightly oversold and bullish for the SPY."%float(pcratio[-1:])
+	else:
+		return "The VIX Put/Call ratio is at %s, this is a neutral reading."%float(pcratio[-1:])
 def evaluate():
 	statement = vix_put_call()
 	a = Contango()
@@ -140,9 +143,9 @@ def evaluate():
 	g = VATR()
 	f = VCO()
 	h = VTRO()
-	total  = a + b + c  + d +e + f + g +h
+	total  = a + b + c	+ d +e + f + g +h
 	if total > 4:
-		return "The VIX is at %s,%s \n  The Full Volatility Index is bullish."%(VIX[-1],statement)
+		return "The VIX is at %s,%s \n	The Full Volatility Index is bullish."%(VIX[-1],statement)
 	else:
 		return "The VIX is at %s,%s \n The Full Volatility Index is bearish."%(VIX[-1],statement)
 if __name__ == "__main__":
