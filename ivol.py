@@ -61,7 +61,7 @@ if market_day():
 
     cur.execute('update IMP_VOL_TABLE set YESTERDAY_VALUE = TODAY_VALUE')
     cur.execute("CREATE TABLE IF NOT EXISTS HISTORICAL_VOL(DAY DATE,NAME TEXT,VOL INT)")
-    date = (datetime.datetime.today()- datetime.timedelta(hours = 6)).strftime('%Y-%m-%d')
+    date = (datetime.datetime.today()- datetime.timedelta(days = 1)).strftime('%Y-%m-%d')
     for i in sp500:
         try:
             url = "http://www.ivolatility.com/options.j?ticker=%s&R=0&top_lookup__is__sent=1"%i['symbol']
@@ -72,8 +72,10 @@ if market_day():
                 print i['symbol']
                 pass
             if market_day():
-            cur.execute("""update IMP_VOL_TABLE set TODAY_VALUE = %s where name = '%s'"""%(current,i['symbol']))
-            cur.execute("INSERT INTO HISTORICAL_VOL(DAY,NAME,VOL) VALUES (?,?,?)",(date,i['symbol'],current))
+				cur.execute("""update IMP_VOL_TABLE set TODAY_VALUE = %s where name = '%s'"""%(current,i['symbol']))
+				cur.execute("INSERT INTO HISTORICAL_VOL(DAY,NAME,VOL) VALUES (?,?,?)",(date,i['symbol'],current))
+			else:
+				pass
             print "%s success The value is %s"%(i['symbol'],current)
             time.sleep(random.uniform(0,1.25))
         except:
