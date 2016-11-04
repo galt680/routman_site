@@ -69,7 +69,7 @@ if market_day():
             driver.get(url)
             try:
                 current = float(driver.find_element_by_xpath("/html/body/div/div[3]/div[2]/table[1]/tbody/tr[3]/td[1]/table[2]/tbody/tr[9]/td[2]/font").text.strip('%'))
-            except:
+            except Exception as e:
                 print i['symbol']
                 pass
             if market_day():
