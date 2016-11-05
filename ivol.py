@@ -73,7 +73,7 @@ if market_day():
                 print e
                 print i['symbol']
                 pass
-            if market_day():
+            if True:
                 cur.execute("""update IMP_VOL_TABLE set TODAY_VALUE = %s where name = '%s'"""%(current,i['symbol']))
                 cur.execute("INSERT INTO HISTORICAL_VOL(DAY,NAME,VOL) VALUES (?,?,?)",(date,i['symbol'],current))
             else:
