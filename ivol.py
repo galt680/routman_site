@@ -68,7 +68,7 @@ if market_day():
             url = "http://www.ivolatility.com/options.j?ticker=%s&R=0&top_lookup__is__sent=1"%i['symbol']
             driver.get(url)
             try:
-                current = float(driver.find_element_by_xpath("/html/body/div/div[3]/div[2]/table[1]/tbody/tr[3]/td[1]/table[2]/tbody/tr[9]/td[2]/font").text.strip('%'))
+                current = float(driver.find_element_by_xpath("/html/body/div/div[4]/div[2]/table[1]/tbody/tr[3]/td[1]/table[2]/tbody/tr[9]/td[2]/font").text.strip('%'))
             except Exception as e:
                 print e
                 print i['symbol']
@@ -97,4 +97,5 @@ if market_day():
     except:
         pass
 else:
+    print "weekend"
     pass
