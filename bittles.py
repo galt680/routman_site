@@ -10,7 +10,7 @@ from lxml import html
 from mv import VIX
 import re
 from passwords import auth
-
+###
 #get the Total Call and Put ratios and equity Put/Call ratio
 Total_Call = q.get('CBOE/TOTAL_PC',authtoken = auth)['Total Call Volume']
 Total_Put  = q.get('CBOE/TOTAL_PC',authtoken = auth)['Total Put Volume']
