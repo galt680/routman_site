@@ -19,11 +19,11 @@ def market_day():
     today = ((datetime.datetime.today()- datetime.timedelta(hours = 6)))
     not_holiday = today not in holidays.UnitedStates()
     isntweekend = today.isoweekday()
-    if not_holiday and (isntweekend != 7) and (isntweekend != 6):
+    if not_holiday and (isntweekend != 7) and (isntweekend != 1):
         return True
     else:
         return False
-
+###
 start = timeit.default_timer()
 
 if market_day():
