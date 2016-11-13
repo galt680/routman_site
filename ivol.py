@@ -12,7 +12,7 @@ import holidays
 sp500 = finsymbols.get_sp500_symbols()
 random.shuffle(sp500)
 
-
+###
 
 
 def market_day():
