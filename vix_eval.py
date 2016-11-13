@@ -7,7 +7,7 @@ except:
 	import Quandl as q
 from mv import VIX,VX1,VX2,VXST,T1,T2,VX3,VXST,VXV
 from passwords import auth
-
+### 
 def decider(signal,value1,value2, reverse = False):
 	if reverse == False:
 		if signal > value1:
