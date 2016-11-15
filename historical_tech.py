@@ -3,7 +3,7 @@ from datetime import timedelta, date, datetime
 import sqlite3 as lite
 from tech import Tech
 import datetime
-import random 
+import random
 from dateutil import parser
 import finsymbols
 
@@ -11,7 +11,7 @@ today = date.today()
 def market_day():
     not_holiday = today not in holidays.UnitedStates()
     isntweekend = today.isoweekday()
-    if not_holiday and (isntweekend != 7) and (isntweekend != 6):
+    if not_holiday and (isntweekend != 7) and (isntweekend != 1):
         return True
     else:
         return False
@@ -33,7 +33,7 @@ def make_watchlist():
             'PCLN','SPY'
         ]
 
-        
+
 
     dic = {}
     for i in symbols:
@@ -90,15 +90,15 @@ if market_day():
     make_spy()
 else:
     print("weekend")
-    
+
 
 '''
-    
+
 con = lite.connect('ALERT_DATA_HISTORY.db')
 cur = con.cursor()
 import datetime
 cur.execute("select NAME,DAY,SIGNAL from HISTORY")
 for i in cur.fetchall():
-#     if parser.parse((i[1])) > 
+#     if parser.parse((i[1])) >
       if (parser.parse(str(i[1]))) > parser.parse('2016-12-10'):
         print (i)'''
