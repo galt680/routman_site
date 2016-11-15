@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<title>(Routman APP)</title>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+	<body style =" background-color:DodgerBlue;text-align:center">
+		<div style =  "text-align:center">
+			<p style = "font-size:25px; padding: 15px;text-align: center;width :100%; ">Enter threshold for spike.</p>
+			
+							
+				<form style = "font-size:20px" action="imp_spikes" method="POST" id = "imp form">
+				    
+						<select class="spike-range" form = "imp form" name = "threshold"></select>
+					
+					<br>
+					
+					<p style = "font-size:25px">How many days to measure.</p>
+					
+						<select class="1-100" form = "imp form" name = "days"></select>
+					<br>
+						<p style = "font-size:25px">Press send to see stocks</p>
+					<br>
+						<input style = "font-size:15px" type="submit" name="my-form" value="Send">
+					
+				</form>
+		</div>
+			<br>
+			<br>
+		<form action="/">
+			<input style = "font-size:15px" type="submit" value="Return to Homepage">
+		</form>
+	</body>
+</html>
+<script>
+$(function(){
+    var $select = $(".1-100");
+    for (i=1;i<=100;i++){
+        $select.append($('<option></option>').val(i).html(i))
+    }
+});</script>
+<script>
+$(function(){
+    var $select = $(".spike-range");
+    for (i=20;i<=80;i+=5){
+        $select.append($('<option></option>').val(i).html(i))
+    }	
+});</script>
+   
