@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
-<p>Days {{days}}</p>
-<p>Thresh {{thresh}}</p>
-<p>tesla;tjka;ljaf</p>
 
+	{% for n in spiked %}
+	<ul>
+		<li style=" font-size:20px; border: 5px solid black">
+        <a>The implied volatility for {{n[0]}} spiked {{n[1]}}% over the last {{days}} days</a>
+		</li>
+	</ul>	
+        {% endfor %}
 </html>

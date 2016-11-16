@@ -78,11 +78,13 @@ sVXV =indexs[2]
 sVXMT = indexs[3]
 
 
-
-#get latest spy data from bloomberg
-page = requests.get('http://www.bloomberg.com/quote/SPY:US')
-soup = bs4.BeautifulSoup(page.text,'lxml')
-sSPY = float(re.findall(r'''(\d\d\d\.\d\d+)''',(str(soup.find_all('div',class_ = 'price'))))[0])
+try:
+	#get latest spy data from bloomberg
+	page = requests.get('http://www.bloomberg.com/quote/SPY:US')
+	soup = bs4.BeautifulSoup(page.text,'lxml')
+	sSPY = float(re.findall(r'''(\d\d\d\.\d\d+)''',(str(soup.find_all('div',class_ = 'price'))))[0])
+except:
+	pass
 
 
 try:
