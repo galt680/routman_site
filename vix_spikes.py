@@ -4,7 +4,16 @@ import sqlite3 as lite
 
 
 	
+def vix_decider():
+	try:
+		con = lite.connect('/home/yaschaffel/mysite/IMP_VOL_TABLE.db')
+	except:
+		con = lite.connect('IMP_VOL_TABLE.db')
+	cur = con.cursor()
+	cur.execute("select count(*)from HISTORICAL_VOL where NAME = 'AAPL'")
+	length = cur.fetchall()[0][0]-2
 	
+	return render_template('vix_decider.html',length = length)
 	
 	
 def vix_spikes_page():
