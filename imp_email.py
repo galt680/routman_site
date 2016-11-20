@@ -37,6 +37,7 @@ def send_impvol(test = False):
         def signal():
             def get_percent(symbol):
                 symbol = symbol.upper()
+                print dict[i]
                 return round(100 *((dict[symbol][0]-dict[symbol][2])/dict[symbol][2]),2)
             def checker():
                 spiked = []
@@ -81,5 +82,5 @@ def send_impvol(test = False):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
         print ("IMP VOL Email sent!")
-send_impvol()
+send_impvol(test = True)
 
