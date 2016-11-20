@@ -37,13 +37,13 @@ def send_impvol(test = False):
         def signal():
             def get_percent(symbol):
                 symbol = symbol.upper()
-                print dict[i]
                 return round(100 *((dict[symbol][0]-dict[symbol][2])/dict[symbol][2]),2)
             def checker():
                 spiked = []
                 for i in dict:
                     if get_percent(i) >30:
-                        spiked.append([i,get_percent(i)])
+                        maxs,mins,recent = max(dict[i]),min(dict[i]),dict[i][0]
+                        spiked.append([i,get_percent(i),maxs,mins,recent])
                     else:
                         pass
                 return spiked
@@ -51,7 +51,7 @@ def send_impvol(test = False):
             checker()
         spiked = signal()
         for i in spiked:
-             multi_spike.append("%s spiked %s%%. \n"%(i[0],i[1]))
+             multi_spike.append("%s spiked %s%%. The implied volatility is currently at %s%%. The high for the year was %s%% and the low was %s%%. \n"%(i[0],i[1],i[4],i[2],i[3]))
     message = """Good morning,\n(This is an automated message)\n\nThese are the stocks that have had an implied volatility spike:\n"""
     for i in range(len(alert_overbought)):
         message +='\n The implied volatility for %s spiked' %alert_overbought[i][0]
