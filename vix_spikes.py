@@ -11,7 +11,7 @@ def vix_decider():
 		con = lite.connect('IMP_VOL_TABLE.db')
 	cur = con.cursor()
 	cur.execute("select count(*)from HISTORICAL_VOL where NAME = 'AAPL'")
-	length = cur.fetchall()[0][0]-2
+	length = cur.fetchall()[0][0]-2 
 	
 	return render_template('vix_decider.html',length = length)
 	
@@ -44,7 +44,7 @@ def vix_spikes_page():
 	def signal():
 		def get_percent(symbol):
 			symbol = symbol.upper()
-			return round(100*dict[symbol].iloc[::-1].pct_change()[0],2)
+			return round(100*dict[symbol].iloc[::-1].pct_change(periods = (days-1))[0],2)
 		def checker():
 			spiked = []
 			for i in dict:
@@ -58,4 +58,5 @@ def vix_spikes_page():
 
 	spiked = signal()
 	print spiked
+	print len(dict['UA.C'])
 	return render_template('imp_spikes.html',spiked = spiked, days = days)
