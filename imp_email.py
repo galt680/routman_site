@@ -82,5 +82,5 @@ def send_impvol(test = False):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
         print ("IMP VOL Email sent!")
-send_impvol(test = True)
+send_impvol()
 
