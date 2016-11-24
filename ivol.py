@@ -17,7 +17,8 @@ random.shuffle(sp500)
 
 def market_day():
     today = ((datetime.datetime.today()))
-    not_holiday = today not in holidays.UnitedStates()
+    today2 = (datetime.datetime.today()-datetime.timedelta(days = 1))
+    not_holiday = today2 not in holidays.UnitedStates()
     isntweekend = today.isoweekday()
     if not_holiday and (isntweekend != 7) and (isntweekend != 1):
         return True
