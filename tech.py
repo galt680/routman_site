@@ -97,7 +97,6 @@ class Tech(object):
             self.close = np.array(self.close)
 
         elif time == "weekly":
-            print 2
             try:
                 self.data = q.get('YAHOO/%s'%name.upper(), authtoken =  auth, collapse = "weekly")
                 self.data = self.data.round(decimals = 3)
@@ -171,4 +170,4 @@ class Tech(object):
         else:
             return 0
 
-	
+    

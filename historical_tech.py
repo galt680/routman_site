@@ -85,7 +85,75 @@ def make_spy():
     con.commit()
     con.close()
 
+
+    
+    
+def make_watchlist_weekly():
+    date = (datetime.datetime.today()- datetime.timedelta(hours = 6)).strftime('%Y-%m-%d')
+    symbols = [
+            'AAL','AAPL','ABT','ABBV','ABX','ACAD','ADBE','ADP','AET','AGO','ALL','AMAT','AMD','AMGN','APA','AXP','BA','BAC','BAX','BCLYF',
+            'BHI','BMY','BP','C','CAR','CBI','CELG','CMCSA','CNI','COP', 'CREE','CSCO','CREE','CTL','CLX','CTSH','CVS','CVX','DFS','DIS',
+            'DO','DTV','DVN','ESRX','EXAS','F','FB','FCX','FITB','FLR','GE','GILD','GLW','GS','L_GSK','HAL','HP','HPQ','IBM','INTC','INTU',
+            'JNJ','JPM','KEY','NYSE_KKR','KR','KRFT','KSU','L','LLY','LNKD','LOW','MCK','MET','MDT','MMM','MON','MRK','MSFT','MUR','MYL','NBL',
+            'NE','NFX','NTRS','NVSEF','ORCL','OXY','P','PE','PEP','PFE','PG','PLUG','PM','PNC','PSX','PXD','QCOM','RRC','SCHW','STLD','STT',
+            'T','TA_TEVA','TRV','TSO','TWTR','TXN','TYC','UBS','UNGS','UNH','URI','USB','UTX','VRX','VZ','WFC','X','YHOO','XOM','GOOG','JPM',
+            'PCLN','SPY'
+        ]
+
+
+
+    dic = {}
+    for i in symbols:
+        try:
+            tech = Tech(i,time = "weekly")
+            dic[i] = {'signal':tech.signals(),
+                      "RSI":tech.rsi(),
+                      "Stochastic":tech.slow_stoch()}
+            print ("%s successful"%i)
+        except Exception as e:
+            print (e)
+            print ("%s unsuccessful"%i)
+    try:
+        con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA_HISTORY.db')
+    except:
+        con = lite.connect('ALERT_DATA_HISTORY.db')
+
+    cur = con.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS WEEKLY_HISTORY(DAY DATE,NAME TEXT,SIGNAL INT,RSI INT,SLOWK INT,SLOWD INT)")
+    for i in dic:
+        cur.execute("INSERT INTO WEEKLY_HISTORY(DAY,NAME,SIGNAL,RSI,SLOWK,SLOWD) VALUES (?,?,?,?,?,?)",(date,i,dic[i]['signal'],dic[i]['RSI'],dic[i]['Stochastic'][0],dic[i]['Stochastic'][0]))
+    con.commit()
+    con.close()
+
+def make_spy_weekly():
+    date = (datetime.datetime.today()- datetime.timedelta(hours = 6)).strftime('%Y-%m-%d')
+    sp500 = finsymbols.get_sp500_symbols()
+    dic = {}
+    for i in sp500:
+        i = i['symbol']
+        try:
+            tech = Tech(i,time = "weekly")
+            dic[i] = {'signal':tech.signals(),
+                      "RSI":tech.rsi(),
+                      "Stochastic":tech.slow_stoch()}
+            print ("%s successful"%i)
+        except Exception as e:
+            print (e)
+            print ("%s unsuccessful"%i)
+    try:
+        con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA_HISTORY.db')
+    except:
+        con = lite.connect('ALERT_DATA_HISTORY.db')
+
+    cur = con.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS SPY_HISTORY_WEEKLY(DAY DATE,NAME TEXT,SIGNAL INT,RSI INT,SLOWK INT,SLOWD INT)")
+    for i in dic:
+        cur.execute("INSERT INTO SPY_HISTORY_WEEKLY(DAY,NAME,SIGNAL,RSI,SLOWK,SLOWD) VALUES (?,?,?,?,?,?)",(date,i,dic[i]['signal'],dic[i]['RSI'],dic[i]['Stochastic'][0],dic[i]['Stochastic'][0]))
+    con.commit()
+    con.close() 
 if market_day():
+    make_spy_weekly()
+    make_watchlist_weekly()
     make_watchlist()
     make_spy()
 else:
