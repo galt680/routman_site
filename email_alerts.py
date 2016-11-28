@@ -301,3 +301,5 @@ def send_spy_weekly(test = False):
 		
 send_watchlist()
 send_spy()
+send_spy_weekly()
+send_watchlist_weekly()

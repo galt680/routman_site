@@ -57,4 +57,7 @@ daily_data()
 weekly_data()
 stop = timeit.default_timer()
 
+
+daily_data()
+weekly_data()
 print "Task took %s minutes"%((stop - start)/60)
