@@ -43,14 +43,3 @@ except:
 
 
 
-# dic = {}
-# for i in sp500:
-	# i = i['symbol']
-	# url = "http://www.ivolatility.com/options.j?ticker=%s&R=0&top_lookup__is__sent=1"%i
-	# try:
-		# driver.get(url)
-		# current = float(driver.find_element_by_xpath("/html/body/div/div[3]/div[2]/table[1]/tbody/tr[3]/td[1]/table[2]/tbody/tr[9]/td[2]/font").text.strip('%'))
-		# dic[i] = {'Current Implied Volatility':current,}
-		# time.sleep(uniform(2,5.5))
-	# except:
-		# print "%s unsuccessful"%i
