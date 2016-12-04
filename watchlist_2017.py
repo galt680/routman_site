@@ -60,6 +60,7 @@ def delete_symbol_2017():
         print type(symbol)
         for i in symbol.split(','):
             if i in symbol_list:
+				i = i.upper()
                 while i in symbol_list:
                     symbol_list.remove((i))
             else:
