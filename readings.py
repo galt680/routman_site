@@ -13,7 +13,10 @@ except:
     import Quandl as q
 import re,requests,bs4,urllib,time,random
 from tech import Tech
-from ilvu import love
+try:
+	from ilvu import love
+except:
+	pass
 from passwords import auth
 
 #renders the html form
