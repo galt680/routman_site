@@ -155,21 +155,17 @@ def make_spy_weekly():
     
 def make_watchlist_2017():
     date = (datetime.datetime.today()- datetime.timedelta(hours = 6)).strftime('%Y-%m-%d')
-    positions_2017 = [
-                    'AMZN', 'VRX', 'AGN', 'RH', 'BLUE', 'CMG', 'MNK', 'PRGO', 'GPRO', 'GILD',
-                    'BBBY', 'CF', 'FOSL', 'WDC', 'TWTR', 'ALXN', 'ILMN', 'VIAB', 'TEVA', 'BIIB',
-                    'CL', 'LLL', 'KORS', 'KMI', 'NLNK', 'SKX', 'SWIR', 'CVS', 'WSM', 'WHR',
-                    'MYL', 'BMRN', 'CLVS', 'OPHT', 'ALNY', 'TSLA', 'BMY ', 'NSM', 'STX', 'VOD',
-                    'ICPT', 'MCK', 'MRO', 'SHPG', 'SPG', 'NOV', 'ETE', 'MON', 'TRGP', 'COP',
-                    'IBB', 'SSYS', 'CLDX', 'M', 'WFM', 'DATA', 'TRN', 'BG', 'DVN', 'THC',
-                    'PBYI', 'CSIQ', 'BX', 'AXP', 'APC', 'HES', 'AMBA', 'XON'
-                     ]
+    try:
+        pickle_in = (open("/home/yaschaffel/mysite/symbols_list.pickle","rb"))
+    except:
+        pickle_in = open("symbols_list.pickle","rb")
+    positions_2017 = (pickle.load(pickle_in))
 
 
 
 
     dic = {}
-    for i in symbols:
+    for i in positions_2017:
         try:
             tech = Tech(i,time = "daily")
             dic[i] = {'signal':tech.signals(),

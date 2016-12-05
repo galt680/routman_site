@@ -13,15 +13,15 @@ symbols = [
             'PCLN','SPY'
           ]
     
-positions_2017 = [
-            'AMZN', 'VRX', 'AGN', 'RH', 'BLUE', 'CMG', 'MNK', 'PRGO', 'GPRO', 'GILD',
-            'BBBY', 'CF', 'FOSL', 'WDC', 'TWTR', 'ALXN', 'ILMN', 'VIAB', 'TEVA', 'BIIB',
-            'CL', 'LLL', 'KORS', 'KMI', 'NLNK', 'SKX', 'SWIR', 'CVS', 'WSM', 'WHR',
-            'MYL', 'BMRN', 'CLVS', 'OPHT', 'ALNY', 'TSLA', 'BMY ', 'NSM', 'STX', 'VOD',
-            'ICPT', 'MCK', 'MRO', 'SHPG', 'SPG', 'NOV', 'ETE', 'MON', 'TRGP', 'COP',
-            'IBB', 'SSYS', 'CLDX', 'M', 'WFM', 'DATA', 'TRN', 'BG', 'DVN', 'THC',
-            'PBYI', 'CSIQ', 'BX', 'AXP', 'APC', 'HES', 'AMBA', 'XON'
-            ]
+# positions_2017 = [
+            # 'AMZN', 'VRX', 'AGN', 'RH', 'BLUE', 'CMG', 'MNK', 'PRGO', 'GPRO', 'GILD',
+            # 'BBBY', 'CF', 'FOSL', 'WDC', 'TWTR', 'ALXN', 'ILMN', 'VIAB', 'TEVA', 'BIIB',
+            # 'CL', 'LLL', 'KORS', 'KMI', 'NLNK', 'SKX', 'SWIR', 'CVS', 'WSM', 'WHR',
+            # 'MYL', 'BMRN', 'CLVS', 'OPHT', 'ALNY', 'TSLA', 'BMY ', 'NSM', 'STX', 'VOD',
+            # 'ICPT', 'MCK', 'MRO', 'SHPG', 'SPG', 'NOV', 'ETE', 'MON', 'TRGP', 'COP',
+            # 'IBB', 'SSYS', 'CLDX', 'M', 'WFM', 'DATA', 'TRN', 'BG', 'DVN', 'THC',
+            # 'PBYI', 'CSIQ', 'BX', 'AXP', 'APC', 'HES', 'AMBA', 'XON'
+            # ]
 
 
 
@@ -118,5 +118,11 @@ def daily_data_2017(symbols):
         
 daily_data(symbols = symbols)
 weekly_data(symbols = symbols)
+
+try:
+    pickle_in = (open("/home/yaschaffel/mysite/symbols_list.pickle","rb"))
+except:
+    pickle_in = open("symbols_list.pickle","rb")
+positions_2017 = (pickle.load(pickle_in))
 daily_data_2017(symbols = positions_2017)
 
