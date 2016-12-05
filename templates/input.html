@@ -5,7 +5,7 @@
 	<body style =" background-color:DodgerBlue;text-align:center">
 		<div style =  "text-align:center">
 			<h2 text-align: center>Add symbols by entering below, to add multiple symbols seperate each symbol by a comma.</h2>
-				<form style = "font-size:30px" action="add_symbol" method="POST" id = "stock form">
+				<form style = "font-size:30px" action="add_symbol{{x}}" method="POST" id = "stock form">
 				
 					<input type="text" name="symbol">
 					
@@ -15,7 +15,7 @@
 				</form>
 				
 			<h2 text-align: center>To delete symbol type it in below, to delete multiple symbols seperate each symbol by a comma</h2>
-				<form style = "font-size:30px" action="delete_symbol" method="POST" id = "stock form">
+				<form style = "font-size:30px" action="delete_symbol{{x}}" method="POST" id = "stock form">
 				
 					<input type="text" name="symbol">
 					

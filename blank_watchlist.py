@@ -10,10 +10,10 @@ def blank_watchlist_landing_page():
             pickle_in = open("blank_watchlist.pickle","rb")
         symbol_list = sorted(pickle.load(pickle_in))
         print symbol_list
-        return render_template('input_blank.html',symbol_list = (symbol_list))
+        return render_template('input.html',symbol_list = (symbol_list), x = "_blank")
     except Exception as e:
         print e
-        return render_template('input_blank.html')
+        return render_template('input.html', x = "_blank")
 
 
 def add_symbol_blank():
