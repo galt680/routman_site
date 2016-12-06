@@ -13,7 +13,6 @@ def blank_watchlist_landing_page():
         return render_template('input.html',symbol_list = (symbol_list), x = "_blank")
     except Exception as e:
         print e
-        print "Whats the problem"
         return render_template('input.html', x = "_blank")
 
 
