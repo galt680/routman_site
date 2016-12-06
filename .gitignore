@@ -27,6 +27,7 @@
 *.exe
 *.o
 *.so
+*.pickle
 
 # Packages #
 ############
