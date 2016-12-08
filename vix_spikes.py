@@ -58,5 +58,5 @@ def vix_spikes_page():
 
     spiked = signal()
     print spiked
-    print len(dict['UA.C'])
     return render_template('imp_spikes.html',spiked = spiked, days = days)
+
