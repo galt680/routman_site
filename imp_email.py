@@ -37,7 +37,12 @@ def send_impvol(test = False):
         def signal():
             def get_percent(symbol):
                 symbol = symbol.upper()
-                return round(100 *((dict[symbol][0]-dict[symbol][2])/dict[symbol][2]),2)
+                try:
+                    return round(100 *((dict[symbol][0]-dict[symbol][2])/dict[symbol][2]),2)
+                except Exception as e:
+                    print e
+                    print symbol,"---",dict[symbol]
+
             def checker():
                 spiked = []
                 for i in dict:
