@@ -14,9 +14,9 @@ except:
 import re,requests,bs4,urllib,time,random
 from tech import Tech
 try:
-	from ilvu import love
+    from ilvu import love
 except:
-	pass
+    pass
 from passwords import auth
 
 #renders the html form
@@ -135,10 +135,11 @@ def readings():
         print 4
         alert = Tech(symbol)
         alert_data = []
-        if alert.signals() == True:
+        try:
             alert_data.append(alert.rsi())
             alert_data.append(alert.slow_stoch())
-        else:
+            print alert_data
+        except:
             print "ERROR"
             alert_data = None
 
