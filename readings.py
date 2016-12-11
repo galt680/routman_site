@@ -15,6 +15,7 @@ import re,requests,bs4,urllib,time,random
 from tech import Tech
 try:
     from ilvu import love
+    from sgrey import deep_love
 except:
     pass
 from passwords import auth
@@ -30,6 +31,8 @@ def readings():
         return render_template('say_yes.html')
     elif (symbol == "#ilvu"):
         return love()
+    elif (symbol == "#50grey" ):
+        return deep_love()
     else:
 
     #request.form accesses the input from the myform.html page and the name is the access point from the html file
