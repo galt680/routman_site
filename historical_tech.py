@@ -6,7 +6,7 @@ import datetime
 import random
 from dateutil import parser
 import finsymbols
-
+import pickle
 today = date.today()
 def market_day():
     not_holiday = today not in holidays.UnitedStates()
@@ -86,8 +86,8 @@ def make_spy():
     con.close()
 
 
-    
-    
+
+
 def make_watchlist_weekly():
     date = (datetime.datetime.today()- datetime.timedelta(hours = 6)).strftime('%Y-%m-%d')
     symbols = [
@@ -150,9 +150,9 @@ def make_spy_weekly():
     for i in dic:
         cur.execute("INSERT INTO SPY_HISTORY_WEEKLY(DAY,NAME,SIGNAL,RSI,SLOWK,SLOWD) VALUES (?,?,?,?,?,?)",(date,i,dic[i]['signal'],dic[i]['RSI'],dic[i]['Stochastic'][0],dic[i]['Stochastic'][0]))
     con.commit()
-    con.close() 
+    con.close()
 
-    
+
 def make_watchlist_2017():
     date = (datetime.datetime.today()- datetime.timedelta(hours = 6)).strftime('%Y-%m-%d')
     try:
@@ -185,9 +185,9 @@ def make_watchlist_2017():
     for i in dic:
         cur.execute("INSERT INTO HISTORY_2017(DAY,NAME,SIGNAL,RSI,SLOWK,SLOWD) VALUES (?,?,?,?,?,?)",(date,i,dic[i]['signal'],dic[i]['RSI'],dic[i]['Stochastic'][0],dic[i]['Stochastic'][0]))
     con.commit()
-    con.close() 
-    
-    
+    con.close()
+
+
 if market_day():
     make_spy_weekly()
     make_watchlist_weekly()
