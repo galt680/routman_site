@@ -1,6 +1,7 @@
 import sqlite3 as lite
 from tech import Tech
 import timeit
+import pickle
 
 start = timeit.default_timer()
 symbols = [
@@ -12,7 +13,7 @@ symbols = [
             'T','TA_TEVA','TRV','TSO','TWTR','TXN','TYC','UBS','UNGS','UNH','URI','USB','UTX','VRX','VZ','WFC','X','YHOO','XOM','GOOG','JPM',
             'PCLN','SPY'
           ]
-    
+
 # positions_2017 = [
             # 'AMZN', 'VRX', 'AGN', 'RH', 'BLUE', 'CMG', 'MNK', 'PRGO', 'GPRO', 'GILD',
             # 'BBBY', 'CF', 'FOSL', 'WDC', 'TWTR', 'ALXN', 'ILMN', 'VIAB', 'TEVA', 'BIIB',
@@ -114,8 +115,8 @@ def daily_data_2017(symbols):
     except:
         pass
 
-        
-        
+
+
 daily_data(symbols = symbols)
 weekly_data(symbols = symbols)
 

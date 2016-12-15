@@ -154,9 +154,9 @@ def send_watchlist_2017(test = False):
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
-        print ("Watchlist Email sent!")     
-        
-        
+        print ("Watchlist Email sent!")
+
+
 def send_spy(test = False):
     today = datetime.date.today()
     alert_overbought = []
@@ -228,7 +228,7 @@ def send_spy(test = False):
         print ("SPY Email sent!")
 
 
-        
+
 def send_watchlist_weekly(test = False):
     today = datetime.date.today()
     alert_overbought = []
@@ -302,8 +302,8 @@ def send_watchlist_weekly(test = False):
         server.quit()
         print ("Weekly Watchlist Email sent!")
 
-        
-        
+
+
 def send_spy_weekly(test = False):
     today = datetime.date.today()
     alert_overbought = []
@@ -372,8 +372,8 @@ def send_spy_weekly(test = False):
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
-        print ("SPY Email sent!")       
-      
+        print ("SPY Email sent!")
+
 send_watchlist()
 send_spy()
 send_spy_weekly()
