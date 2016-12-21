@@ -373,9 +373,8 @@ def send_spy_weekly(test = False):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
         print ("SPY Email sent!")
-
+send_spy_weekly()
 send_watchlist()
 send_spy()
-send_spy_weekly()
 send_watchlist_weekly()
 send_watchlist_2017()
