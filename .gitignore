@@ -4,8 +4,6 @@
 /__init__.py
 /__init__.pyc
 / authtoken.p
-/flask_app.py
-/flask_app.pyc
 /manage.py
 /settings.py
 /settings.pyc

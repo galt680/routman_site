@@ -1,30 +1,40 @@
-import sqlite3 as lite
 import smtplib
+import datetime
+from sqlite_connect import connect_to_db
+from passwords import pswd
 try:
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
 except:
     from email.MIMEMultipart import MIMEMultipart
     from email.MIMEText import MIMEText
-import datetime
-from passwords import pswd
-
+def send_alert(db_name, table_name, test = False):
+	today = datetime.date.today()
+	rsi_oversold     = []
+	rsi_overbought   = []
+	alert_oversold   = []
+	alert_overbought = []
+	
+	con = connect_to_db(db_name)
+	with con:
+		cur = con.cursor()
+		cur.execute("SELECT * FROM %s WHERE SIGNAL != 0 ORDER BY NAME ASC"%table_name)
+		for name,signal,rsi,slowk,slowd in cur.fetchall():
+			if signal == -1:
+				alert_overbought.append("%s is overbought with RSI at %s and the stochastics at %s and %s"%(name,rsi,slowk,slowd))
+			elif signal == 1:
+				alert_oversold.append("%s is oversold with RSI at %s and the stochastics at %s and at %s"%(name,rsi,slowk,slowd)) 
 def send_watchlist(test = False):
     today = datetime.date.today()
     alert_overbought = []
     alert_oversold = []
     rsi_overbought = []
     rsi_oversold = []
-    try:
-        con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA.db')
-    except:
-        con = lite.connect('ALERT_DATA.db')
-    cur = con.cursor()
+    con = connect_to_db('ALERT_DATA')
     with con:
         cur = con.cursor()
         cur.execute("SELECT * FROM ALERT_DATA WHERE SIGNAL != 0 ORDER BY Name Asc")
-        rows = cur.fetchall()
-        for name,signal,rsi,slowk,slowd in rows:
+        for name,signal,rsi,slowk,slowd in cur.fetchall():
             if signal == -1:
                 alert_overbought.append("%s is overbought with RSI at %s and the stochastics at %s and at %s"%(name,rsi,slowk,slowd))
             elif signal == 1:
@@ -33,8 +43,7 @@ def send_watchlist(test = False):
                 pass
 
         cur.execute("SELECT * FROM ALERT_DATA WHERE RSI NOT BETWEEN 35 AND 65 ORDER BY RSI DESC")
-        rows = cur.fetchall()
-        for name,signal,rsi,slowk,slowd in rows:
+        for name,signal,rsi,slowk,slowd in cur.fetchall():
             if rsi > 65:
                 rsi_overbought.append("%s is overbought with RSI at %s"%(name,rsi))
             elif rsi < 35:
@@ -373,8 +382,8 @@ def send_spy_weekly(test = False):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
         print ("SPY Email sent!")
-send_spy_weekly()
-send_watchlist()
-send_spy()
-send_watchlist_weekly()
-send_watchlist_2017()
+# send_spy_weekly(test = True)
+send_watchlist(test = True)
+# send_spy(test = True)
+# send_watchlist_weekly(test = True)
+# send_watchlist_2017(test = True)
