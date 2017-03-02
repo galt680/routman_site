@@ -72,7 +72,7 @@ def delete_symbol_blank():
             pickle_out = open("blank_watchlist.pickle","wb")
         pickle.dump(symbol_list,pickle_out)
         pickle_out.close()
-        return watchlist_landing_page()
+        return blank_watchlist_landing_page()
     except Exception as e:
         print e
         return blank_watchlist_landing_page()
