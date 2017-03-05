@@ -14,6 +14,20 @@ symbols = [
             'PCLN','SPY'
           ]
 
+watchlist_hurry = [ u'AA', u'AAPL', u'ACCO', u'ADNT', u'AEE', u'AET', u'AFL', u'AGN', u'AKS', u'ALL',
+                    u'AMAT', u'AMP', u'AMZN', u'ARNC', u'ASIX', u'AVY', u'ACP', u'BAC', u'BAX', u'BBRY',
+                    u'BIIB', u'BIVV',u'BP', u'BSX', u'C', u'CBS', u'CC', u'CELG', u'CHTR', u'CL', u'CLX',
+                    u'CMCSA', u'COP', u'CSCO', u'CTL', u'CV', u'CVX',u'DDAIF', u'DD', u'DFS', u'DIG', u'DIS',
+                    u'DUK', u'DVMT', u'EMR', u'ENB', u'ESRX', u'ESV', u'FAZ', u'FBHS', u'FCX', u'FOXA',
+                    u'FRCMQ', u'FTR', u'GE', u'GSK', u'GS', u'GILD', u'GLW', u'HD', u'HON', u'HPE', u'HPQ',
+                    u'HYH', u'IBB', u'IBM', u'IMMU', u'INTC',u'JCI', u'JNJ', u'JPM', u'KMB', u'KO', u'LITE',
+                    u'LLY', u'M', u'MDT', u'MMM', u'MNKD', u'MPC', u'MON', u'MRK', u'MRO',u'MS', u'MSI',
+                    u'MSFT', u'MSTX', u'MYGN', u'MYRX', u'NCR', u'NSRGY', u'NRG', u'NWSA', u'OCN', u'ORCL',
+                    u'PACW', u'PBI',u'PEP', u'PDLI', u'PFE', u'PG', u'PJC', u'PHG', u'PNC', u'PNR', u'POR',
+                    u'PRGO', u'PRTA', u'PTQME', u'RAD', u'RAI', u'REGN',u'SR', u'SHPG', u'SJM', u'STI', u'SYF',
+                    u'T', u'TEL', u'TDC', u'TEVA', u'TIME', u'TROV', u'TWX', u'UEPEO', u'USB', u'UNH',
+                    u'UYG', u'VIAB', u'VOD', u'VRX', u'VZ', u'WBA', u'WFC', u'WM', u'WMT', u'WU', u'XOM', u'YUM']
+
 # positions_2017 = [
             # 'AMZN', 'VRX', 'AGN', 'RH', 'BLUE', 'CMG', 'MNK', 'PRGO', 'GPRO', 'GILD',
             # 'BBBY', 'CF', 'FOSL', 'WDC', 'TWTR', 'ALXN', 'ILMN', 'VIAB', 'TEVA', 'BIIB',
@@ -115,15 +129,43 @@ def daily_data_2017(symbols):
     except:
         pass
 
+def watchlist_speed(symbols):
+    dic = {}
+    for i in symbols:
+        try:
+            tech = Tech(i,time = "daily")
+            dic[i] = {'signal':tech.signals(),
+                      "RSI":tech.rsi(),
+                      "Stochastic":tech.slow_stoch()}
+            print "%s successful"%i
+        except Exception as e:
+            print e
+            print "%s unsuccessful"%i
+    try:
+        con = lite.connect('/home/yaschaffel/mysite/ALERT_DATA.db')
+    except:
+        con = lite.connect('ALERT_DATA.db')
+    print con
+    cur = con.cursor()
+    cur.execute("DROP TABLE IF EXISTS watchlist_hurry")
+    cur.execute("CREATE TABLE watchlist_hurry(NAME TEXT,SIGNAL INT,RSI INT,SLOWK INT,SLOWD INT)")
+    for i in dic:
+        cur.execute("INSERT INTO watchlist_hurry(NAME,SIGNAL,RSI,SLOWK,SLOWD) VALUES (?,?,?,?,?)",(i,dic[i]['signal'],dic[i]['RSI'],dic[i]['Stochastic'][0],dic[i]['Stochastic'][0]))
+    con.commit()
+    stop = timeit.default_timer()
+    try:
+        print "Task took %s minutes"%(int(stop - start)/60)
+    except:
+        pass
+if __name__ == '__main__':
+    daily_data(symbols = symbols)
+    weekly_data(symbols = symbols)
+    watchlist_speed(symbols = watchlist_hurry)
 
-
-daily_data(symbols = symbols)
-weekly_data(symbols = symbols)
-
-try:
-    pickle_in = (open("/home/yaschaffel/mysite/symbols_list.pickle","rb"))
-except:
-    pickle_in = open("symbols_list.pickle","rb")
-positions_2017 = (pickle.load(pickle_in))
-daily_data_2017(symbols = positions_2017)
+    try:
+        pickle_in = (open("/home/yaschaffel/mysite/symbols_list.pickle","rb"))
+    except:
+        pickle_in = open("symbols_list.pickle","rb")
+    positions_2017 = (pickle.load(pickle_in))
+    daily_data_2017(symbols = positions_2017)
 
