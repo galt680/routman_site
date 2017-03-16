@@ -10,7 +10,7 @@ def blank_watchlist_landing_page():
             pickle_in = open("blank_watchlist.pickle","rb")
         symbol_list = sorted(pickle.load(pickle_in))
         print symbol_list
-        return render_template('input.html',symbol_list = (symbol_list), x = "_blank")
+        return render_template('input.html',symbol_list = [i.upper() for i in symbol_list], x = "_blank")
     except Exception as e:
         print e
         return render_template('input.html', x = "_blank")
@@ -26,7 +26,6 @@ def add_symbol_blank():
 
         symbol = request.form['symbol']
         for i in symbol.split(','):
-            print type(str(i))
             symbol_list.append(i.upper().strip().strip("'"))
         try:
             pickle_out = (open("/home/yaschaffel/mysite/blank_watchlist.pickle","wb"))
@@ -61,6 +60,8 @@ def delete_symbol_blank():
         for i in symbol.split(','):
             if i in symbol_list:
                 i = i.upper()
+                print "entered",i
+                print symbol_list
                 while i in symbol_list:
                     symbol_list.remove((i))
             else:
