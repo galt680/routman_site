@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h1>{{symbol.upper()}} Call Premiums</h1>
+<table>
+  <tr>
+    <th>Month</th>
+    <th>~5% Strike:Premium</th>
+	<th>~10% Strike:Premium</th>
+  </tr>
+  {%for month in data[symbol]%}
+	  <tr>
+		<td>{{month}}</td>
+		<td>{{data[symbol][month][5][0]}}:   {{data[symbol][month][5][1]}}</td>
+		<td>{{data[symbol][month][10][0]}}:   {{data[symbol][month][10][1]}}</td>
+
+		
+	  </tr>  
+  {% endfor %}
+  </table>
+  
+  <br>
+  	<form action="/">
+		<input style = "font-size:15px" type="submit" value="Return to Homepage">
+	</form>
+</body>
+</html>
