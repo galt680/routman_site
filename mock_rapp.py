@@ -10,31 +10,18 @@ app = Flask(__name__)
 
 def show_symbols_from_selected_watchlist():
     try:
-        name = request.form['days']
+        name = request.form['watchlist_name']
+        print name
     except:
         pass
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%'TRY1')]
+    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%name)]
     # line = str(' '.join(i[0] for i in symbols))
     # print line
     return render_template('symbols_from_watchlist.html',symbol_list = symbol_list)
 
-@app.route('/symbols_2017', methods = ["GET","POST"])   
-def symbols_2017():
-    return watchlist_landing_page()
-    
-@app.route('/symbols_blank', methods = ["GET","POST"])  
-def symbols_blank():
-    return blank_watchlist_landing_page()
-    
-@app.route("/add_symbol_blank", methods = ["GET","POST"])
-def symbol_blank_add():
-    return add_symbol_blank()
-    
-@app.route("/delete_symbol_blank", methods = ["GET","POST"])
-def symbol_blank_delete():
-    return delete_symbol_blank()    
+
     
 @app.route("/watchlist_landing_page", methods = ["GET","POST"])
 def landing():
@@ -56,16 +43,16 @@ def delete_symbol():
     symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%'TRY1')]
     print name
     return show_symbols_from_selected_watchlist()
-	
+    
 @app.route("/add_symbol", methods  = ["GET","POST"])
 def add_symbol():
     name = request.form['symbol']
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-	for individual_symbol in name.spit(','):
-		cur.execute("INSERT INTO TRY1 (NAME, USER ) VALUES (?,?)", (individual_symbol,'routman'))
+    for individual_symbol in name.split(','):
+        cur.execute("INSERT INTO TRY1 (NAME, USER ) VALUES (?,?)", (individual_symbol,'routman'))
     con.commit()
-    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%'TRY1')]	
+    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%'TRY1')]   
     print name
     return show_symbols_from_selected_watchlist()
 
