@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template,url_for
+from flask import Flask,request,render_template,url_for,session
 from watchlist_2017 import watchlist_landing_page,add_symbol_2017,delete_symbol_2017
 import sqlite3 as lite
 from blank_watchlist import blank_watchlist_landing_page,add_symbol_blank,delete_symbol_blank
@@ -6,14 +6,19 @@ from blank_watchlist import blank_watchlist_landing_page,add_symbol_blank,delete
 
 
 app = Flask(__name__)
+app.secret_key = "super secret key"
 
 
 def show_symbols_from_selected_watchlist():
+
     try:
         name = request.form['watchlist_name']
         print name
-    except:
-        pass
+        session['my_var'] = name
+    except Exception as e:
+        print e
+
+    print "secrert",session['my_var']
     con = lite.connect("watchlists.db")
     cur = con.cursor()
     symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%name)]
@@ -31,18 +36,21 @@ def landing():
 
 @app.route("/selected_watchlist", methods  = ["GET","POST"])
 def selected_watchlist():
+    
     return show_symbols_from_selected_watchlist()
 
 @app.route("/delete_symbol", methods  = ["GET","POST"])
 def delete_symbol():
     name = request.form['symbol']
+    hope = session['my_var']
+    print hope
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-    cur.execute("DELETE FROM TRY1 WHERE NAME = '%s'"%name)
+    cur.execute("DELETE FROM %s WHERE NAME = '%s'"%(hope,name))
     con.commit()
-    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%'TRY1')]
+    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%hope)]
     print name
-    return show_symbols_from_selected_watchlist()
+    return render_template('symbols_from_watchlist.html',symbol_list = symbol_list)
     
 @app.route("/add_symbol", methods  = ["GET","POST"])
 def add_symbol():
