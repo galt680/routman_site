@@ -71,7 +71,8 @@ def delete_symbol():
     picked_watchlist = session['picked_watchlist']
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-    cur.execute("DELETE FROM %s WHERE NAME = '%s'"%(picked_watchlist,name))
+    for individual_symbol in name.split(','):
+        cur.execute("DELETE FROM %s WHERE NAME = '%s'"%(picked_watchlist,individual_symbol.upper())	)
     con.commit()
     return show_symbols_from_selected_watchlist()
     
@@ -81,8 +82,8 @@ def add_symbol():
     picked_watchlist = session['picked_watchlist']
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-    for     individual_symbol in name.split(','):
-        cur.execute("INSERT INTO %s (NAME, USER ) VALUES (?,?)"%picked_watchlist, (individual_symbol,'routman'))
+    for individual_symbol in name.split(','):
+        cur.execute("INSERT INTO %s (NAME, USER ) VALUES (?,?)"%picked_watchlist, (individual_symbol.upper(),'routman'))
     con.commit() 
     return show_symbols_from_selected_watchlist()
 
