@@ -14,26 +14,27 @@ def show_symbols_from_selected_watchlist():
     try:
         name = request.form['watchlist_name']
         print name
-        session['my_var'] = name
+        session['picked_watchlist'] = name
     except Exception as e:
         print e
 
-    print "secrert",session['my_var']
+    print "secrert",session['picked_watchlist']
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%name)]
-    # line = str(' '.join(i[0] for i in symbols))
-    # print line
+    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%session['picked_watchlist'])]
     return render_template('symbols_from_watchlist.html',symbol_list = symbol_list)
-
 
     
 @app.route("/watchlist_landing_page", methods = ["GET","POST"])
 def landing():
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-    return render_template("watchlist_landing_page.html",database = [watchlist[0] for watchlist in cur.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()])
+    return render_template( "watchlist_landing_page.html",database = (
+							[watchlist[0] for watchlist in cur.execute(
+							"SELECT name FROM sqlite_master WHERE type='table'").fetchall() 
+							if not watchlist[0].startswith('_')]))
 
+	
 @app.route("/selected_watchlist", methods  = ["GET","POST"])
 def selected_watchlist():
     
@@ -42,25 +43,25 @@ def selected_watchlist():
 @app.route("/delete_symbol", methods  = ["GET","POST"])
 def delete_symbol():
     name = request.form['symbol']
-    hope = session['my_var']
-    print hope
+    picked_watchlist = session['picked_watchlist']
     con = lite.connect("watchlists.db")
     cur = con.cursor()
-    cur.execute("DELETE FROM %s WHERE NAME = '%s'"%(hope,name))
+    cur.execute("DELETE FROM %s WHERE NAME = '%s'"%(picked_watchlist,name))
     con.commit()
-    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%hope)]
+    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%picked_watchlist)]
     print name
-    return render_template('symbols_from_watchlist.html',symbol_list = symbol_list)
+    return show_symbols_from_selected_watchlist()
     
 @app.route("/add_symbol", methods  = ["GET","POST"])
 def add_symbol():
     name = request.form['symbol']
+    picked_watchlist = session['picked_watchlist']
     con = lite.connect("watchlists.db")
     cur = con.cursor()
     for individual_symbol in name.split(','):
-        cur.execute("INSERT INTO TRY1 (NAME, USER ) VALUES (?,?)", (individual_symbol,'routman'))
+        cur.execute("INSERT INTO %s (NAME, USER ) VALUES (?,?)"%picked_watchlist, (individual_symbol,'routman'))
     con.commit()
-    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%'TRY1')]   
+    symbol_list = [i[0] for i in cur.execute("SELECT Name FROM %s  "%picked_watchlist)]   
     print name
     return show_symbols_from_selected_watchlist()
 
