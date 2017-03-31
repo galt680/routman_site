@@ -24,6 +24,12 @@
 					<input style = "font-size:20px" type="submit" name="my-form" value="Send">
 					
 				</form>
+				
+				<h2>Do you want to recieve emails for this watchlist?</h2>
+				<form style="font-size:25px" action="/to_send_or_not" method="POST" >
+				<input style="height:15px;width:15px" type="checkbox" name="abc" {{checked}}>
+				<input  style="font-size:15px" type="submit" value="Send">
+				</form>
 		</div>
 				{% for n in symbol_list %}
 				<ul>
