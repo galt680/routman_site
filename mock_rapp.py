@@ -42,7 +42,21 @@ def landing():
                             "SELECT name FROM sqlite_master WHERE type='table'").fetchall() 
                             if not watchlist[0].startswith('_')]))
 
-    
+@app.route("/create_watchlist",methods = ["GET","POST"])
+def create_watchlist():
+	print 1
+	session['picked_watchlist'] = request.form['watchlist_to_create']
+	print 2
+	con = lite.connect("watchlists.db")
+	cur = con.cursor()
+	cur.execute("CREATE TABLE IF NOT EXISTS %s (NAME TEXT, USER TEXT)"%session['picked_watchlist'])
+	print 3
+	con.commit()
+	print 4
+	return show_symbols_from_selected_watchlist()
+
+
+							
 @app.route("/selected_watchlist", methods  = ["GET","POST"])
 def selected_watchlist():
     

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-	<title>(Routman APP)</title>
+	<title>Routman APP</title>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	</head>
@@ -9,7 +9,7 @@
 		<div style =  "text-align:center">
 
 					
-					<p style = "font-size:25px">Pick a watchlist.</p>
+					<h3>Pick a watchlist.</h3>
 					
 						<select class="watchlist" form = "imp form" name = "watchlist_name">
 						{% for watchlist in database%}
@@ -17,20 +17,27 @@
 						{% endfor %}
 						></select>
 						
-					<br>
-						<p style = "font-size:25px">Press send to see stocks</p>
-					<br>
-					<form style = "font-size:20px" action="/selected_watchlist"" method="POST" id = "imp form" name = "watchlist_name">
-					<input style = "font-size:15px" type="submit"  value="Send" >
 					
-					</form>
+		<h3>Press send to see stocks</h3>
+		<form style = "font-size:20px" action="/selected_watchlist"" method="POST" id = "imp form" name = "watchlist_name">
+		<input style = "font-size:15px" type="submit"  value="Send" >
+		</form>
 						
-				</form>
+		<h3>To create new watchlist enter name below hit create watchlist</h3>
+		<form action="/create_watchlist" method="POST">
+		
+		<input type="text" name="watchlist_to_create">
+		<br>
+		<br>
+		<input style = "font-size:15px" type="submit"  value="Create Watchlist" >
+		</form>
 		</div>
 			<br>
 			<br>
+
+		
 		<form action="/">
-			<input style = "font-size:15px" type="submit" value="Return to Homepage">
+			<input style = "font-size:15px" type="submit" value="Return to homepage">
 		</form>
 	</body>
 </html>
