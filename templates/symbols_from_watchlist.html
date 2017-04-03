@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<title>Routman APP</title>
+	<H1>{{watchlist_name}}</H1>
+	<body style =" background-color:DodgerBlue;text-align:center">
+		<div style =  "text-align:center">
+			<h2 text-align: center>Add symbols by entering below, to add multiple symbols seperate each symbol by a comma.</h2>
+				<form style = "font-size:30px" action="/add_symbol" method="POST" id = "stock form">
+				
+					<input type="text" name="symbol">
+					
+
+					<input style = "font-size:20px" type="submit" name="my-form" value="Send">
+					
+				</form>
+				
+			<h2 text-align: center>To delete symbol type it in below, to delete multiple symbols seperate each symbol by a comma</h2>
+				<form style = "font-size:30px" action="/delete_symbol" method="POST" id = "stock form">
+				
+					<input type="text" name="symbol">
+					
+
+					<input style = "font-size:20px" type="submit" name="my-form" value="Send">
+					
+				</form>
+				
+				<h2>If you want to receive email alerts for this watchlist select the checkbox and send</h2>
+				<form style="font-size:25px" action="/to_send_or_not" method="POST" >
+				<input style="height:15px;width:15px" type="checkbox" name="abc" {{checked}}>
+				<input  style="font-size:15px" type="submit" value="Send">
+				</form>
+		</div>
+				{% for n in symbol_list %}
+				<ul>
+					<li style=" font-size:20px; border: 5px solid black">
+					<a>{{n}}</a>
+					</li>
+				</ul>	
+        {% endfor %}
+			<br>
+			<br>
+		<form action="/watchlist_landing_page">
+			<input style = "font-size:15px" type="submit" value="Return to watchlist landing page ">
+		</form>
+		<br>
+		<form action="/">
+			<input style = "font-size:15px" type="submit" value="Return to home page ">
+		</form>
+	</body>
+</html>
+   

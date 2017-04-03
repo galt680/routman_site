@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<title>Routman APP</title>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+	<body style =" background-color:DodgerBlue;text-align:center">
+		<div style =  "text-align:center">
+
+					
+					<h3>Pick a watchlist.</h3>
+					
+						<select class="watchlist" form = "imp form" name = "watchlist_name">
+						{% for watchlist in database%}
+						<option>{{watchlist}}</option>
+						{% endfor %}
+						></select>
+						
+					
+		<h3>Press send to see stocks</h3>
+		<form style = "font-size:20px" action="/selected_watchlist"" method="POST" id = "imp form" name = "watchlist_name">
+		<input style = "font-size:15px" type="submit"  value="Send" >
+		</form>
+						
+		<h3>To create new watchlist enter name below hit create watchlist</h3>
+		<form action="/create_watchlist" method="POST">
+		
+		<input type="text" name="watchlist_to_create">
+		<br>
+		<br>
+		<input style = "font-size:15px" type="submit"  value="Create Watchlist" >
+		</form>
+		</div>
+			<br>
+			<br>
+
+		
+		<form action="/">
+			<input style = "font-size:15px" type="submit" value="Return to homepage">
+		</form>
+	</body>
+</html>
+<script> 
+$(function(){ 
+     var $select = $(".1-100"); 
+     for (i=2;i<={{length}};i++){ 
+        $select.append($('<option></option>').val(i).html(i)) -->
+    } 
+	});</script> 
+   
