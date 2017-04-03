@@ -7,6 +7,8 @@ import numpy as np
 from passwords import auth
 import requests
 import re
+import time
+import random
 
 #create class that obtains data for object and calculates technical indicators for them.
 class Tech(object):
@@ -23,11 +25,11 @@ class Tech(object):
                 self.data = self.data.round(decimals = 3)
                 
 
-            except:
+            except Exception as e:
                 try:
                     self.data = q.get('GOOG/%s'%name.upper(),authtoken =  auth)
                     self.data = self.data.round(decimals = 3)
-                except:
+                except Exception as e:
                     pass
     #gets minute data from goog finance api
             url = "https://www.google.com/finance/getprices?i=60&p=1d&f=c,o,h,l&df=cpct&q=%s"%(name.upper())

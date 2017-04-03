@@ -9,7 +9,7 @@ except:
 import datetime
 from passwords import pswd
 
-def send_watchlist(test = False):
+def send_watchlist(table_name,test = False):
     today = datetime.date.today()
     alert_overbought = []
     alert_oversold = []
@@ -22,7 +22,7 @@ def send_watchlist(test = False):
     cur = con.cursor()
     with con:
         cur = con.cursor()
-        cur.execute("SELECT * FROM ALERT_DATA WHERE SIGNAL != 0 ORDER BY Name Asc")
+        cur.execute("SELECT * FROM %s WHERE SIGNAL != 0 ORDER BY Name Asc"%table_name)
         rows = cur.fetchall()
         for name,signal,rsi,slowk,slowd in rows:
             if signal == -1:
@@ -32,7 +32,7 @@ def send_watchlist(test = False):
             else:
                 pass
 
-        cur.execute("SELECT * FROM ALERT_DATA WHERE RSI NOT BETWEEN 35 AND 65 ORDER BY RSI DESC")
+        cur.execute("SELECT * FROM %s WHERE RSI NOT BETWEEN 35 AND 65 ORDER BY RSI DESC"%table_name)
         rows = cur.fetchall()
         for name,signal,rsi,slowk,slowd in rows:
             if rsi > 65:
@@ -42,16 +42,16 @@ def send_watchlist(test = False):
             else:
                 pass
 
-    message = """Good evening,\n(This is an automated message)\n\nThese are the stocks that are currently overbought and oversold from your watchlist:\n"""
+    message = """Good evening,\n(This is an automated message)\n\nThese are the stocks that are currently overbought and oversold from %s:\n"""%table_name
     for i in alert_overbought:
         message +='\n %s'%i
-    message +="""\n\nThese are the stocks that are currently oversold from your watchlist:\n"""
+    message +="""\n\nThese are the stocks that are currently oversold from %s:\n"""%table_name
     for i in alert_oversold:
         message += '\n %s'%i
-    message +="""\n\nThese are the stocks that are currently overbought based only on RSI from your watchlist:\n"""
+    message +="""\n\nThese are the stocks that are currently overbought based only on RSI from %s:\n"""%table_name
     for i in rsi_overbought:
         message += '\n %s'%i
-    message +="""\n\nThese are the stocks that are currently oversold based only on RSI from your watchlist:\n"""
+    message +="""\n\nThese are the stocks that are currently oversold based only on RSI from %s:\n"""%table_name
     for i in rsi_oversold:
         message += '\n %s'%i
     message += "\n\n If you have any adjustments you'd like to make to the alert settings or if you'd like to add symbols to the watchlist please let me know.\nYisroel Schaffel"
@@ -63,7 +63,7 @@ def send_watchlist(test = False):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Watchlist Alerts for %s"%today.strftime("%m-%d-%Y")
+    msg['Subject'] = "%s Alerts for %s"%(table_name,today.strftime("%m-%d-%Y"))
 
 
     body = message
@@ -373,8 +373,7 @@ def send_spy_weekly(test = False):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
         print ("SPY Email sent!")
+for i in [i[0] for i in cur.execute("SELECT * FROM _emails_to_send")]:        
+	send_watchlist(i,test = True)
 send_spy_weekly()
-send_watchlist()
 send_spy()
-send_watchlist_weekly()
-send_watchlist_2017()
