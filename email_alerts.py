@@ -377,3 +377,4 @@ for i in [i[0] for i in cur.execute("SELECT * FROM _emails_to_send")]:
 	send_watchlist(i,test = True)
 send_spy_weekly()
 send_spy()
+
