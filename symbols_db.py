@@ -29,17 +29,17 @@ def get_data(symbols,table_name):
     for i in dic:
         cur.execute("INSERT INTO %s(NAME,SIGNAL,RSI,SLOWK,SLOWD) VALUES (?,?,?,?,?)"%table_name,(i,dic[i]['signal'],dic[i]['RSI'],dic[i]['Stochastic'][0],dic[i]['Stochastic'][0]))
     con.commit()
-    
 
 
 
 
 
 
-con = lite.connect("watchlists.db")
+
+con = lite.connect("/home/yaschaffel/mysite/watchlists.db")
 cur = con.cursor()
 for i in [i[0] for i in cur.execute("SELECT * FROM _emails_to_send")]:
-	get_data([x[0] for x in cur.execute("SELECT * FROM %s"%i)],i)
+    get_data([x[0] for x in cur.execute("SELECT * FROM %s"%i)],i)
 	# get_data()
 
 
