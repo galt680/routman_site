@@ -373,6 +373,8 @@ def send_spy_weekly(test = False):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
         print ("SPY Email sent!")
+con = lite.connect("watchlists.db")
+cur = con.cursor()
 for i in [i[0] for i in cur.execute("SELECT * FROM _emails_to_send")]:        
 	send_watchlist(i,test = True)
 send_spy_weekly()
