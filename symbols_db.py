@@ -41,7 +41,7 @@ cur = con.cursor()
 for i in [i[0] for i in cur.execute("SELECT * FROM _emails_to_send")]:
     get_data([x[0] for x in cur.execute("SELECT * FROM %s"%i)],i)
 	# get_data()
-
+#acco,acp,vz
 
 
 
